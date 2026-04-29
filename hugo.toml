@@ -1,0 +1,22 @@
+baseURL = "https://CodePlato3721.github.io/"
+languageCode = "en-us"
+title = "Code Plato"
+theme = "hugo-theme-stack"
+
+[pagination]
+pagerSize = 10
+
+[params]
+  mainSections = ["post"]
+
+[params.sidebar]
+  emoji = "🖥️"
+  subtitle = "AI Engineer in the making"
+
+[params.article]
+  math = false
+  toc = true
+  readingTime = true
+
+[params.comments]
+  enabled = false
