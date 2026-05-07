@@ -2,6 +2,7 @@
 title: "Web4.0 要来了"
 date: 2026-05-06
 draft: false
+image: https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/2026/05/web4-is-coming/zh/banner.png
 tags: ["AI", "Web4.0", "架构"]
 categories: ["随想"]
 ---
