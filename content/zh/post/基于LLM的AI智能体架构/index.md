@@ -5,6 +5,7 @@ draft: false
 
 image: https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/2026/05/llm-agent-architecture-a-new-kind-of-personal-computer/cn/banner.png
 
+categories: ["AI 哲学"]
 tags:
   - AI
   - LLM
