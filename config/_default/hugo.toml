@@ -1,0 +1,8 @@
+baseURL = "https://CodePlato3721.github.io/"
+title = "Code Plato"
+theme = "hugo-theme-stack"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+
+[pagination]
+pagerSize = 10

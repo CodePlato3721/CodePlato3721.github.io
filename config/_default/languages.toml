@@ -1,0 +1,17 @@
+[en]
+  languageName = "English"
+  weight = 1
+  title = "Code Plato"
+  contentDir = "content/en"
+
+  [en.params.sidebar]
+    subtitle = "AI Engineer in the making"
+
+[zh]
+  languageName = "简体中文"
+  weight = 2
+  title = "Code Plato"
+  contentDir = "content/zh"
+
+  [zh.params.sidebar]
+    subtitle = "AI 工程师，炼成中"
