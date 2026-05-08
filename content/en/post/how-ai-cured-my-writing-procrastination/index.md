@@ -2,6 +2,7 @@
 title: "How AI Cured My Writing Procrastination"
 date: 2026-05-04
 draft: false
+image: https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/2026/05/ai-cured-writing-procrastination/banner.png
 tags: ["AI"]
 categories: ["Thoughts"]
 ---
