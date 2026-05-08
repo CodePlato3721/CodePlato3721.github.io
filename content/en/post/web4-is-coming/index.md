@@ -72,6 +72,8 @@ I'd even argue this will be the fourth industrial revolution, because for the fi
 
 ## 1. The Software Interface
 
+![Software Interface](https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/2026/05/web4-is-coming/02_ui.png)
+
 The software interface of Web4.0 will look very different from today's — but not completely unfamiliar.
 
 Future software will most likely split into: **software on the left, AI on the right**.
@@ -112,6 +114,8 @@ to:
 ---
 
 ## 2. System Architecture
+
+![System Architecture](https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/2026/05/web4-is-coming/03_sys.png)
 
 The core shift in Web4.0 is that every frontend will eventually connect to an AI engine.
 
@@ -156,6 +160,8 @@ And toward:
 ---
 
 ## 3. The Product Lifecycle
+
+![Product Lifecycle](https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/2026/05/web4-is-coming/04_lifecycle.png)
 
 The lifecycle of Web4.0 products will also change.
 
