@@ -4,3 +4,5 @@ resources/_gen/
 .wrangler/
 .claude/
 node_modules/
+publish/.env
+publish/.venv/
