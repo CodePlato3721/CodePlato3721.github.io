@@ -4,7 +4,7 @@ date: 2026-05-14
 draft: false
 image: https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/2026/05/how-to-interview-candidates-in-the-ai-era/banner.png
 tags: ["AI", "Interview"]
-categories: ["Tech"]
+categories: ["AI Methodology"]
 ---
 
 ## Background
