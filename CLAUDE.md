@@ -17,12 +17,61 @@ In frontmatter: use the Chinese name for `zh` posts, English name for `en` posts
 
 ## Publishing Workflow
 
-### Banner images
-- Upload to Cloudflare R2 bucket `codeplato-images` via `wrangler r2 object put --remote`
-- Key pattern: `{year}/{month}/{en-slug}/banner.png`
-- Public URL: `https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{year}/{month}/{en-slug}/banner.png`
-- Do **not** commit banner images to git
+### Cloudflare R2 — Image Storage
 
-### Post structure
-- Chinese posts: `content/zh/post/{title}/index.md`
-- English posts: `content/en/post/{en-slug}/index.md`
+Bucket: `codeplato-images`  
+Public base URL: `https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/`  
+Account ID: `deaa58408c878ef2c59ace4a70bf0346`  
+Auth token: stored in `.claude/settings.local.json`
+
+**Key (path) conventions:**
+- Banner: `{YYYY}/{MM}/{en-slug}/banner.png`
+- Inline images: `{YYYY}/{MM}/{en-slug}/{filename}.png` (e.g. `01.png`, `02_diagram.png`)
+- Chinese-specific language subdirectory (`cn/`) is **not required** — newer posts omit it and put all images directly under `{en-slug}/`
+
+**Upload command (always add `--remote`):**
+```powershell
+cd "c:\Users\alexx\Workspace\CodePlato3721.github.io"
+npx wrangler r2 object put codeplato-images/{YYYY}/{MM}/{en-slug}/banner.png `
+  --file "C:\path\to\banner.png" `
+  --content-type "image/png" `
+  --remote
+```
+
+Do **not** commit images to git.
+
+### Post file structure
+
+**Hugo** static site. Language split:
+- Chinese: `content/zh/post/{zh-dir}/index.md`
+- English: `content/en/post/{en-slug}/index.md`
+
+**Chinese directory name (`zh-dir`):** use the article title in Chinese, but replace the ASCII/full-width colon and other Windows-forbidden chars with `-`. Example: `AI时代如何阅读技术文档-精炼阅读`.
+
+**English slug (`en-slug`):** kebab-case English summary of the title, used for both the `en/post/` directory **and** the R2 image path. Example: `how-to-read-tech-docs-in-the-ai-era`.
+
+### Front matter format
+
+```yaml
+---
+title: "文章标题"
+date: YYYY-MM-DD
+draft: false
+image: https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{YYYY}/{MM}/{en-slug}/banner.png
+tags: ["Tag1", "Tag2"]
+categories: ["分类名"]
+---
+```
+
+- English posts: same format, English title/tags/category
+- When English banner is not yet generated, use `image: BANNER_PLACEHOLDER` and fill in later
+- No `slug` field needed — directory name IS the slug
+
+### Inline images in article body
+
+Reference images with standard Markdown:
+```markdown
+![描述](https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{YYYY}/{MM}/{en-slug}/{filename}.png)
+```
+
+In draft source files, images appear as placeholder tags like `<图片2>`. Replace each with the full URL after uploading.
