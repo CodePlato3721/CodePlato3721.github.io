@@ -1,5 +1,5 @@
 ---
-title: "How to Read Technical Docs in the AI Era: Refined Reading"
+title: "How to Read Technical Docs in the AI Era: Distilled Reading"
 date: 2026-05-15
 draft: false
 image: https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/2026/05/how-to-read-tech-docs-in-the-ai-era/en/banner.png
@@ -34,7 +34,7 @@ This reading bottleneck is fundamentally:
 
 > Total time to read all docs > Your available attention
 
-## Refined Reading
+## Distilled Reading
 
 ### Everything Can Be Distilled
 
@@ -72,7 +72,7 @@ So: when you encounter an interesting concept, don't immediately Google it.
 2. Ask it to include links as supporting evidence
 3. You can click the links to verify. If a link is broken, tell the AI to check the links itself before responding, filtering out dead ones
 
-This is what I call **Refined Reading**.
+This is what I call **Distilled Reading**.
 
 ## Verification
 
