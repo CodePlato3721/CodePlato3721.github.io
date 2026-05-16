@@ -2,6 +2,7 @@ mainSections = ["post"]
 
 [sidebar]
   emoji = "🖥️"
+  avatar = "https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/site/avatar.png"
 
 [article]
   math = false
