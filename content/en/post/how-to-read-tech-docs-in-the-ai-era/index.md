@@ -2,7 +2,7 @@
 title: "How to Read Technical Docs in the AI Era: Refined Reading"
 date: 2026-05-15
 draft: false
-image: BANNER_PLACEHOLDER
+image: https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/2026/05/how-to-read-tech-docs-in-the-ai-era/en/banner.png
 tags: ["AI", "Reading", "Methodology"]
 categories: ["AI Methodology"]
 ---
@@ -28,7 +28,7 @@ But today I realized: finishing all those technical docs is simply impossible. B
 
 Just as technical systems have bottlenecks, I call this the **reading bottleneck**. It's a problem that requires a logical-level solution, not just brute-force effort.
 
-The essence of the bottleneck is that both time and attention are finite resources. Time, as a unit, is too abstract — it doesn't capture the variability in how fast we actually read. So I prefer to use **attention** as the unit of measure. Think of human attention as a kind of token: your **Attention Token**, or **AT**. Strong focus generates an AT field (humor intended). Once it's depleted, sleep is the only way to recharge.
+The essence of the bottleneck is that both time and attention are finite resources. Time, as a unit, is too abstract — it doesn't capture the variability in how fast we actually read. So I prefer to use **attention** as the unit of measure. Think of human attention as a kind of token: your **Attention Token**, or **AT**. Strong focus generates an A.T. Field (LOL). Once it's depleted, sleep is the only way to recharge.
 
 This reading bottleneck is fundamentally:
 
