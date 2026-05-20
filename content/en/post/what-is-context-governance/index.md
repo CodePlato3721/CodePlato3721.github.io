@@ -1,5 +1,5 @@
 ---
-title: "Context Governance Explained with Examples"
+title: "What is Context Governance"
 date: 2026-05-19
 draft: false
 image: https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/2026/05/what-is-context-governance/en/banner.png

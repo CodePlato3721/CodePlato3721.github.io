@@ -11,7 +11,7 @@ import frontmatter
 import requests
 from dotenv import load_dotenv
 
-load_dotenv(Path(__file__).parent.parent / ".env")
+load_dotenv(Path(__file__).parent.parent.parent / ".env")
 
 BASE_URL = "https://CodePlato3721.github.io/"
 DEVTO_API = "https://dev.to/api/articles"
@@ -63,6 +63,8 @@ def publish(filepath: str) -> None:
     post = frontmatter.load(path)
 
     title = post.get("title", path.stem)
+    if re.match(r'^[a-z0-9]+(-[a-z0-9]+)+$', title):
+        sys.exit(f"Error: title '{title}' looks like a slug. Set a proper human-readable title in the frontmatter.")
     tags = [sanitize_tag(t) for t in post.get("tags", [])[:4] if sanitize_tag(t)]
     image = post.get("image", "")
     body = clean_body(post.content, title)
