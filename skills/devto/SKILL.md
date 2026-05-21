@@ -10,7 +10,7 @@ trigger: "发布到 dev.to" 或 "发布英文文章"
 
 ## 前提
 
-- `publish/.env` 中已设置 `DEVTO_API_KEY`
+- `skills/.env` 中已设置 `DEVTO_API_KEY`
 
 ## 步骤
 
@@ -26,7 +26,7 @@ content/en/post/{en-slug}/index.md
 在项目根目录下执行：
 
 ```powershell
-publish\.venv\Scripts\python.exe publish\devto\scripts\devto.py content\en\post\{en-slug}\index.md
+skills\.venv\Scripts\python.exe skills\devto\scripts\devto.py content\en\post\{en-slug}\index.md
 ```
 
 ### 3. 确认结果
