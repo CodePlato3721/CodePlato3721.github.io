@@ -69,14 +69,14 @@ if (-not (Test-Path $bannerPath)) {
 对每张插图：
 - 提取原始文件名（URL 最后一段，如 `01.png`）
 - 去掉扩展名后加前缀 `cn-image-`，保留原扩展名，得到目标文件名（如 `cn-image-01.png`）
-- 下载到 `~/.blog-workspace/csdn/` 目录
+- 下载到 `~/.blog-workspace/` 目录（与 `cn-banner.png` 同级，供所有 skill 共用）
 
 使用 PowerShell：
 ```powershell
-$outDir = "$env:USERPROFILE\.blog-workspace\csdn"
-Invoke-WebRequest -Uri "{img_url}" -OutFile "$outDir\cn-image-{原始文件名去扩展名}.{扩展名}"
+$ws = "$env:USERPROFILE\.blog-workspace"
+Invoke-WebRequest -Uri "{img_url}" -OutFile "$ws\cn-image-{原始文件名去扩展名}.{扩展名}"
 ```
 
 ### 8. 确认输出
 
-列出 `~/.blog-workspace/csdn/` 和 `~/.blog-workspace/cn-banner.png`，确认元数据、封面图、所有插图均已就绪。
+列出 `~/.blog-workspace/`，确认 `cn-banner.png`、所有 `cn-image-*.png` 均在根目录，`元数据.md` 在 `csdn/` 下。
