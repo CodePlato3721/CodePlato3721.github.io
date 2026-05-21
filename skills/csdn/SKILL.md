@@ -62,6 +62,21 @@ if (-not (Test-Path $bannerPath)) {
 }
 ```
 
-### 7. 确认输出
+### 7. 下载插图
 
-列出 `~/.blog-workspace/` 的内容，确认 `元数据.md`（在 `csdn/` 下）和 `cn-banner.png` 均已就绪。
+扫描文章正文中所有 Markdown 图片引用（`![...](url)`），排除封面图（即 frontmatter `image` 字段的 URL）。
+
+对每张插图：
+- 提取原始文件名（URL 最后一段，如 `01.png`）
+- 去掉扩展名后加前缀 `cn-image-`，保留原扩展名，得到目标文件名（如 `cn-image-01.png`）
+- 下载到 `~/.blog-workspace/csdn/` 目录
+
+使用 PowerShell：
+```powershell
+$outDir = "$env:USERPROFILE\.blog-workspace\csdn"
+Invoke-WebRequest -Uri "{img_url}" -OutFile "$outDir\cn-image-{原始文件名去扩展名}.{扩展名}"
+```
+
+### 8. 确认输出
+
+列出 `~/.blog-workspace/csdn/` 和 `~/.blog-workspace/cn-banner.png`，确认元数据、封面图、所有插图均已就绪。

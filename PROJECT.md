@@ -87,3 +87,4 @@ In draft source files, images appear as placeholder tags like `<图片2>`. Repla
 | "发布中文初稿" 或类似表述 | `skills/draft-to-zh/SKILL.md` |
 | "发布英文版" 或类似表述 | `skills/zh-to-en/SKILL.md` |
 | `发布文章 <文章名> 到 <网站名>` | `skills/<网站名>/SKILL.md` |
+| "准备工作区" | `skills/prepare-workspace/SKILL.md` |
