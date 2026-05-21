@@ -77,3 +77,7 @@ Reference images with standard Markdown:
 ```
 
 In draft source files, images appear as placeholder tags like `<图片2>`. Replace each with the full URL after uploading.
+
+## Skills
+
+当用户说"发布中文初稿"或类似表述时，读取 `skills/draft-to-zh/SKILL.md` 并按其中步骤执行。
