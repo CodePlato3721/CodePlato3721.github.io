@@ -1,12 +1,12 @@
 ---
 name: hackernoon-prepare
-description: 将英文博客文章的 banner 和插图下载到 ~/.blog-workspace，供 HackerNoon 发布使用
+description: 将英文博客文章的 banner 和插图下载到 ~/.blog-workspace，并生成 HackerNoon 发布所需的元数据文件
 trigger: "发布文章 <文章名> 到 hackernoon"
 ---
 
 ## 目标
 
-将指定英文文章的 banner 和正文插图从 R2 下载到 `~/.blog-workspace/`，文件名使用 `en-` 前缀，供 HackerNoon 发布时手动上传。
+将指定英文文章的 banner 和正文插图从 R2 下载到 `~/.blog-workspace/`，文件名使用 `en-` 前缀；并在 `~/.blog-workspace/hackernoon/` 下生成包含发布元数据的 `metadata.md`。
 
 ## 步骤
 
@@ -50,7 +50,32 @@ $ws = "$env:USERPROFILE\.blog-workspace"
 Invoke-WebRequest -Uri "{img_url}" -OutFile "$ws\en-image-{原始文件名去扩展名}.{扩展名}"
 ```
 
-### 5. 确认输出
+### 5. 生成元数据文件
+
+阅读文章正文，生成以下内容：
+
+- **Metadescription**：160 字符以内的英文描述，概括文章核心主题，适合作为 SEO meta description
+- **TL;DR**：3~5 句话的英文摘要，让读者快速了解文章的核心观点和结论
+
+确保 `~/.blog-workspace/hackernoon/` 目录存在：
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.blog-workspace\hackernoon" | Out-Null
+```
+
+将元数据写入 `~/.blog-workspace/hackernoon/metadata.md`：
+
+```markdown
+## Metadescription
+
+{生成的 metadescription，160 字符以内}
+
+## TL;DR
+
+{生成的 TL;DR}
+```
+
+### 6. 确认输出
 
 列出 `~/.blog-workspace/` 中所有 `en-*` 文件，确认下载完整：
 
@@ -60,4 +85,5 @@ Get-ChildItem "$env:USERPROFILE\.blog-workspace" -File | Where-Object { $_.Name 
 
 告知用户：
 - 已下载的文件列表及大小
+- metadata.md 路径
 - 下一步建议（如：打开 HackerNoon 编辑器，手动上传图片后替换正文中的图片链接）
