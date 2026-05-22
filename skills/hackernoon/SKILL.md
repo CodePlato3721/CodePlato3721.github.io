@@ -55,7 +55,7 @@ Invoke-WebRequest -Uri "{img_url}" -OutFile "$ws\en-image-{原始文件名去扩
 阅读文章正文，生成以下内容：
 
 - **Metadescription**：160 字符以内的英文描述，概括文章核心主题，适合作为 SEO meta description
-- **TL;DR**：3~5 句话的英文摘要，让读者快速了解文章的核心观点和结论
+- **TL;DR**：2~3 句话的英文摘要，写成一个 paragraph，不分项，让读者快速了解文章的核心观点和结论
 
 确保 `~/.blog-workspace/hackernoon/` 目录存在：
 
