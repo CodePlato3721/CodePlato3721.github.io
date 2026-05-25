@@ -8,9 +8,9 @@
 
 读取 `~/.blog-workspace/draft/` 目录下的文件：
 
-- 找到唯一的非 `metadata.md` 的 `.md` 文件，读取其全文作为中文草稿
-- 读取 `metadata.md`，提取：
-  - `类别` 字段 → 映射为英文分类名
+- 找到 `草稿.md` 读取其全文作为中文草稿
+- 读取 `元数据.md`，提取：
+  - `英文类别` 字段 → 映射为英文分类名
   - `英文标题` 字段 → 作为文章英文标题（`en-title`）
 
 ---
@@ -29,11 +29,11 @@
 
 | 类别 | categories |
 |------|-----------|
-| AI 的日常使用手册 | Daily AI Usage |
-| AI 工程开发手册 | AI Engineering |
-| AI Skill 开发手册 | AI Skill Dev |
-| AI 哲学 | AI Philosophy |
-| AI 方法论 | AI Methodology |
+| AI日常使用手册 | Daily AI Usage |
+| AI工程开发手册 | AI Engineering |
+| AI  Skill 开发手册 | AI Skill Dev |
+| AI哲学 | AI Philosophy |
+| AI方法论 | AI Methodology |
 | 软件哲学 | Software Philosophy |
 
 ---
