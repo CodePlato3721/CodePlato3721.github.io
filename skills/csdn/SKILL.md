@@ -1,7 +1,7 @@
 ---
-name: csdn-publish-metadata
+name: csdn-publish
 description: 为指定的中文博客文章生成 CSDN 发布所需的元数据文件和封面图
-trigger: "发布到 CSDN" 或 "生成 CSDN 元数据"
+trigger: "发布到 CSDN"
 ---
 
 ## 目标
@@ -21,7 +21,7 @@ content/zh/post/{zh-dir}/index.md
 ### 2. 读取 frontmatter
 
 从文章文件中提取：
-- `image`：封面图 URL
+- `title`：中文标题
 - `categories`：分类专栏值
 
 ### 3. 生成文章摘要
@@ -40,6 +40,9 @@ content/zh/post/{zh-dir}/index.md
 将以下内容写入 `~/.blog-workspace/csdn/元数据.md`：
 
 ```markdown
+# 中文标题
+{title 的值}
+
 # 文章摘要
 {生成的摘要}
 
@@ -47,36 +50,26 @@ content/zh/post/{zh-dir}/index.md
 {categories 的值}
 ```
 
-### 6. 准备封面图
+### 6. 复制封面图
 
-检查 `~/.blog-workspace/cn-banner.png` 是否已存在：
+将 `~/.blog-workspace/draft/cn-banner.png` 复制到 `~/.blog-workspace/csdn/cn-banner.png`：
 
-- **已存在**：直接使用，无需下载。
-- **不存在**：从文章 `image` 字段的 URL 下载，保存为 `~/.blog-workspace/cn-banner.png`。
-
-使用 PowerShell：
 ```powershell
-$bannerPath = "$env:USERPROFILE\.blog-workspace\cn-banner.png"
-if (-not (Test-Path $bannerPath)) {
-    Invoke-WebRequest -Uri "{image_url}" -OutFile $bannerPath
-}
+Copy-Item "$env:USERPROFILE\.blog-workspace\draft\cn-banner.png" `
+          "$env:USERPROFILE\.blog-workspace\csdn\cn-banner.png"
 ```
 
-### 7. 下载插图
+### 7. 复制插图
 
-扫描文章正文中所有 Markdown 图片引用（`![...](url)`），排除封面图（即 frontmatter `image` 字段的 URL）。
+将 `~/.blog-workspace/draft/` 下所有 `cn-image-*.png` 复制到 `~/.blog-workspace/csdn/`：
 
-对每张插图：
-- 提取原始文件名（URL 最后一段，如 `01.png`）
-- 去掉扩展名后加前缀 `cn-image-`，保留原扩展名，得到目标文件名（如 `cn-image-01.png`）
-- 下载到 `~/.blog-workspace/` 目录（与 `cn-banner.png` 同级，供所有 skill 共用）
-
-使用 PowerShell：
 ```powershell
-$ws = "$env:USERPROFILE\.blog-workspace"
-Invoke-WebRequest -Uri "{img_url}" -OutFile "$ws\cn-image-{原始文件名去扩展名}.{扩展名}"
+Copy-Item "$env:USERPROFILE\.blog-workspace\draft\cn-image-*.png" `
+          "$env:USERPROFILE\.blog-workspace\csdn\"
 ```
+
+如果没有 `cn-image-*.png`，跳过此步骤。
 
 ### 8. 确认输出
 
-列出 `~/.blog-workspace/`，确认 `cn-banner.png`、所有 `cn-image-*.png` 均在根目录，`元数据.md` 在 `csdn/` 下。
+列出 `~/.blog-workspace/csdn/`，确认 `元数据.md`、`cn-banner.png`、所有插图均已就绪。

@@ -88,3 +88,15 @@ In draft source files, images appear as placeholder tags like `<图片2>`. Repla
 | "发布英文版" 或类似表述 | `skills/zh-to-en/SKILL.md` |
 | `发布文章 <文章名> 到 <网站名>` | `skills/<网站名>/SKILL.md` |
 | "准备工作区" | `skills/prepare-workspace/SKILL.md` |
+| "发布到 LinkedIn" | `skills/linkedin/SKILL.md` |
+
+## 分类映射（英文名）：
+
+| 类别 | categories |
+|------|-----------|
+| AI日常使用手册 | Daily AI Usage |
+| AI工程开发手册 | AI Engineering |
+| AI  Skill 开发手册 | AI Skill Dev |
+| AI哲学 | AI Philosophy |
+| AI方法论 | AI Methodology |
+| 软件哲学 | Software Philosophy |

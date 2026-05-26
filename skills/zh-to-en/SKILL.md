@@ -19,22 +19,12 @@
 
 | 字段 | 说明 |
 |------|------|
-| `en-title` | 直接使用 metadata.md 中的 `英文标题` |
+| `en-title` | 直接使用 `元数据.md` 中的 `英文标题` |
 | `en-slug` | `en-title` 转 kebab-case，冒号及标点去掉或替换为 `-` |
 | `date` | 今天的日期，格式 `YYYY-MM-DD` |
 | `YYYY/MM` | 从 date 拆出，用于 R2 路径 |
-| `categories` | 从 `类别` 映射到英文分类名（见下表） |
+| `categories` | 直接使用 `元数据.md` 中的 `英文类别` |
 
-分类映射（英文名）：
-
-| 类别 | categories |
-|------|-----------|
-| AI日常使用手册 | Daily AI Usage |
-| AI工程开发手册 | AI Engineering |
-| AI  Skill 开发手册 | AI Skill Dev |
-| AI哲学 | AI Philosophy |
-| AI方法论 | AI Methodology |
-| 软件哲学 | Software Philosophy |
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: devto-publish
 description: 将英文博客文章发布到 dev.to
-trigger: "发布到 dev.to" 或 "发布英文文章"
+trigger: "发布到 dev.to"
 ---
 
 ## 目标

@@ -1,7 +1,7 @@
 ---
-name: juejin-publish-metadata
+name: juejin-publish
 description: 为指定的中文博客文章生成掘金发布所需的元数据文件
-trigger: "发布到掘金" 或 "生成掘金元数据"
+trigger: "发布到掘金"
 ---
 
 ## 目标
@@ -21,7 +21,7 @@ content/zh/post/{zh-dir}/index.md
 ### 2. 读取 frontmatter
 
 从文章文件中提取：
-- `image`：封面图 URL
+- `title`：中文标题
 - `categories`：收录至专栏的值
 
 ### 3. 生成文章摘要
@@ -37,6 +37,9 @@ content/zh/post/{zh-dir}/index.md
 将以下内容写入 `~/.blog-workspace/juejin/元数据.md`：
 
 ```markdown
+# 中文标题
+{title 的值}
+
 # 编辑摘要
 {100 字以内的摘要}
 
@@ -44,21 +47,15 @@ content/zh/post/{zh-dir}/index.md
 {categories 的值}
 ```
 
-### 6. 准备封面图
+### 6. 复制封面图
 
-检查 `~/.blog-workspace/cn-banner.png` 是否已存在：
+将 `~/.blog-workspace/draft/cn-banner.png` 复制到 `~/.blog-workspace/juejin/cn-banner.png`：
 
-- **已存在**：直接使用，无需下载。
-- **不存在**：从文章 `image` 字段的 URL 下载，保存为 `~/.blog-workspace/cn-banner.png`。
-
-使用 PowerShell：
 ```powershell
-$bannerPath = "$env:USERPROFILE\.blog-workspace\cn-banner.png"
-if (-not (Test-Path $bannerPath)) {
-    Invoke-WebRequest -Uri "{image_url}" -OutFile $bannerPath
-}
+Copy-Item "$env:USERPROFILE\.blog-workspace\draft\cn-banner.png" `
+          "$env:USERPROFILE\.blog-workspace\juejin\cn-banner.png"
 ```
 
 ### 7. 确认输出
 
-列出 `~/.blog-workspace/` 的内容，确认 `元数据.md`（在 `juejin/` 下）和 `cn-banner.png` 均已就绪。
+列出 `~/.blog-workspace/juejin/`，确认 `元数据.md` 和 `cn-banner.png` 均已就绪。
