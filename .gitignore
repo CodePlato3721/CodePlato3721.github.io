@@ -7,3 +7,4 @@ node_modules/
 publish/.env
 publish/.venv/
 skills/.env
+skills/**/.env
