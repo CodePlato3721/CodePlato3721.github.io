@@ -10,13 +10,17 @@ trigger: "发布到 CSDN"
 
 ## 步骤
 
-### 1. 找到文章文件
+### 1. 从草稿读取文章标题
 
-根据文章标题，定位中文文章文件：
+读取 `~/.blog-workspace/draft/草稿.md` 的第一行，提取中文标题：
+
+- 第一行格式为 `# 标题文字`，去掉 `# ` 前缀即为 `zh-title`
+
+用 `zh-title` 推导 `zh-dir`（把 Windows 禁止字符 `: / \ * ? " < > |` 及全角等价字符替换为 `-`），定位文章文件：
+
 ```
 content/zh/post/{zh-dir}/index.md
 ```
-`zh-dir` 是文章标题的目录名（把 Windows 禁止字符替换为 `-`，其余保持中文原文）。
 
 ### 2. 读取 frontmatter
 
