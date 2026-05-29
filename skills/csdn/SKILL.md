@@ -1,12 +1,12 @@
 ---
 name: csdn-publish
-description: 为指定的中文博客文章生成 CSDN 发布所需的元数据文件和封面图
+description: 为指定的中文博客文章生成 CSDN 发布所需的元数据、简化版草稿和封面图
 trigger: "发布到 CSDN"
 ---
 
 ## 目标
 
-为一篇中文博客文章生成 CSDN 发布所需的全部素材，输出到 `~/.blog-workspace/csdn/` 目录。
+为一篇中文博客文章生成 CSDN 发布所需的全部素材，输出到 `~/.blog-workspace/csdn/` 目录：元数据文件、简化版草稿、封面图和插图。
 
 ## 步骤
 
@@ -50,7 +50,23 @@ content/zh/post/{zh-dir}/index.md
 {categories 的值}
 ```
 
-### 6. 复制封面图
+### 6. 生成简化版草稿
+
+读取 `content/zh/post/{zh-dir}/index.md` 正文（去除 frontmatter），生成简化版文章，写入 `~/.blog-workspace/csdn/草稿.md`。
+
+简化规则：
+- **去除 frontmatter**：去掉文件开头两个 `---` 之间的全部内容
+- **适度简化文字**：对篇幅较长的说明段落，精简表述，去掉冗余；但保留核心观点，不改变含义
+- **保留不简化的内容**：代码块、示例、表格、列表条目——这类内容结构固定，原样保留
+- **末尾加原文链接**：在文章最后追加一行：
+
+```
+完整版：https://codeplato3721.github.io/zh/post/{zh-dir}/
+```
+
+其中 `{zh-dir}` 需做 URL 编码（中文字符转为 `%XX` 格式），或直接使用浏览器可识别的中文路径均可。
+
+### 7. 复制封面图
 
 将 `~/.blog-workspace/draft/cn-banner.png` 复制到 `~/.blog-workspace/csdn/cn-banner.png`：
 
@@ -59,7 +75,7 @@ Copy-Item "$env:USERPROFILE\.blog-workspace\draft\cn-banner.png" `
           "$env:USERPROFILE\.blog-workspace\csdn\cn-banner.png"
 ```
 
-### 7. 复制插图
+### 8. 复制插图
 
 将 `~/.blog-workspace/draft/` 下所有 `cn-image-*.png` 复制到 `~/.blog-workspace/csdn/`：
 
@@ -70,6 +86,6 @@ Copy-Item "$env:USERPROFILE\.blog-workspace\draft\cn-image-*.png" `
 
 如果没有 `cn-image-*.png`，跳过此步骤。
 
-### 8. 确认输出
+### 9. 确认输出
 
-列出 `~/.blog-workspace/csdn/`，确认 `元数据.md`、`cn-banner.png`、所有插图均已就绪。
+列出 `~/.blog-workspace/csdn/`，确认 `元数据.md`、`草稿.md`、`cn-banner.png`、所有插图均已就绪。
