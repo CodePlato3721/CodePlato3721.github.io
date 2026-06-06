@@ -75,8 +75,9 @@ def publish(filepath: str) -> None:
         "body_markdown": body,
         "published": True,
         "tags": tags,
-        "canonical_url": url,
     }
+    if url:
+        article["canonical_url"] = url
     if image:
         article["main_image"] = image
 

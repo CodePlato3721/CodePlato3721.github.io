@@ -78,17 +78,30 @@ Reference images with standard Markdown:
 
 In draft source files, images appear as placeholder tags like `<图片2>`. Replace each with the full URL after uploading.
 
+## Draft 目录
+
+所有草稿文件位于项目根目录的 `draft/`：
+
+| 文件 | 说明 |
+|------|------|
+| `draft/article.md` | 文章正文草稿（追踪于 git） |
+| `draft/metadata.md` | 元数据：中/英标题、中/英分类（追踪于 git） |
+| `draft/cn-banner.png` | 中文版封面图（gitignore） |
+| `draft/en-banner.png` | 英文版封面图（gitignore） |
+| `draft/cn-image-*.png` | 中文版内联插图（gitignore） |
+| `draft/en-image-*.png` | 英文版内联插图（gitignore） |
+
+所有发布平台都直接从 `draft/` 读取，平台之间没有依赖关系。
+
 ## Skills
 
 所有 skill 文件位于 `skills/<skill-name>/SKILL.md`。遇到以下触发短语时，读取对应 SKILL.md 并按其中步骤执行。
 
 | 触发短语 | 加载的 SKILL.md |
 |---------|----------------|
-| "发布中文初稿" 或类似表述 | `skills/draft-to-zh/SKILL.md` |
-| "发布英文版" 或类似表述 | `skills/zh-to-en/SKILL.md` |
-| `发布文章 <文章名> 到 <网站名>` | `skills/<网站名>/SKILL.md` |
-| "准备工作区" | `skills/prepare-workspace/SKILL.md` |
-| "发布到 LinkedIn" | `skills/linkedin/SKILL.md` |
+| "发布中文版" 或类似表述 | `skills/draft-to-zh/SKILL.md` |
+| "发布英文版" 或类似表述 | `skills/draft-to-en/SKILL.md` |
+| `发布<网站名>` | `skills/<网站名>/SKILL.md` |
 
 ## 分类映射（英文名）：
 

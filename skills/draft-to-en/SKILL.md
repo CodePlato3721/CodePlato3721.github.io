@@ -1,15 +1,15 @@
-# Skill: 从中文草稿制作英文版文章
+# Skill: 从草稿制作英文版文章并发布到个人博客
 
 触发词：用户说"发布英文版"或类似表述时，加载并执行本文件。
 
 ---
 
-## 第一步：扫描草稿目录
+## 第一步：读取草稿内容
 
-读取 `~/.blog-workspace/draft/` 目录下的文件：
+从项目根目录读取以下文件：
 
-- 找到 `草稿.md` 读取其全文作为中文草稿
-- 读取 `元数据.md`，提取：
+- **`draft/article.md`**：读取全文作为中文草稿
+- **`draft/metadata.md`**：提取：
   - `英文分类` 字段 → 映射为英文分类名
   - `英文标题` 字段 → 作为文章英文标题（`en-title`）
 
@@ -19,12 +19,11 @@
 
 | 字段 | 说明 |
 |------|------|
-| `en-title` | 直接使用 `元数据.md` 中的 `英文标题` |
+| `en-title` | 直接使用 `metadata.md` 中的 `英文标题` |
 | `en-slug` | `en-title` 转 kebab-case，冒号及标点去掉或替换为 `-` |
 | `date` | 今天的日期，格式 `YYYY-MM-DD` |
 | `YYYY/MM` | 从 date 拆出，用于 R2 路径 |
-| `categories` | 直接使用 `元数据.md` 中的 `英文分类` |
-
+| `categories` | 直接使用 `metadata.md` 中的 `英文分类` |
 
 ---
 
@@ -40,7 +39,7 @@
 
 ## 第四步：上传英文 Banner
 
-英文 banner 文件名为 `en-banner.png`，位于草稿目录中。
+英文 banner 文件：`draft/en-banner.png`
 
 R2 路径：`{YYYY}/{MM}/{en-slug}/en/banner.png`
 
@@ -48,7 +47,7 @@ R2 路径：`{YYYY}/{MM}/{en-slug}/en/banner.png`
 
 ```powershell
 npx wrangler r2 object put "codeplato-images/{YYYY}/{MM}/{en-slug}/en/banner.png" `
-  --file "$env:USERPROFILE\.blog-workspace\draft\en-banner.png" `
+  --file "draft\en-banner.png" `
   --content-type "image/png" `
   --remote
 ```
@@ -60,7 +59,7 @@ npx wrangler r2 object put "codeplato-images/{YYYY}/{MM}/{en-slug}/en/banner.png
 
 ## 第五步：上传英文内联图片
 
-草稿目录中的英文图片命名规则为 `en-image-01.png`、`en-image-02.png` 等，对应正文中的 `<en-image-01>`、`<en-image-02>` 占位标签。
+草稿目录中的英文图片命名规则为 `draft/en-image-01.png`、`draft/en-image-02.png` 等，对应正文中的 `<en-image-01>`、`<en-image-02>` 占位标签。
 
 对每一张图片：
 
@@ -69,7 +68,7 @@ npx wrangler r2 object put "codeplato-images/{YYYY}/{MM}/{en-slug}/en/banner.png
 
 ```powershell
 npx wrangler r2 object put "codeplato-images/{YYYY}/{MM}/{en-slug}/en/0N.png" `
-  --file "$env:USERPROFILE\.blog-workspace\draft\en-image-0N.png" `
+  --file "draft\en-image-0N.png" `
   --content-type "image/png" `
   --remote
 ```
