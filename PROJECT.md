@@ -99,6 +99,7 @@ In draft source files, images appear as placeholder tags like `<图片2>`. Repla
 
 | 触发短语 | 加载的 SKILL.md |
 |---------|----------------|
+| "prepare"、"准备草稿" 或类似表述 | `skills/prepare/SKILL.md` |
 | "发布中文版" 或类似表述 | `skills/draft-to-zh/SKILL.md` |
 | "发布英文版" 或类似表述 | `skills/draft-to-en/SKILL.md` |
 | `发布<网站名>` | `skills/<网站名>/SKILL.md` |

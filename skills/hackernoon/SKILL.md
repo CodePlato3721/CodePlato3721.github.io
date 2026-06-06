@@ -1,12 +1,12 @@
 ---
 name: hackernoon-prepare
-description: 直接从草稿目录生成 HackerNoon 发布所需的元数据文件，并复制图片到工作区
-trigger: "发布文章 <文章名> 到 hackernoon"
+description: 从 draft/en-article.md 生成 HackerNoon 发布素材，替换图片占位符为 R2 URL
+trigger: "发布hackernoon"
 ---
 
 ## 目标
 
-直接从项目的 `draft/` 目录读取文章，生成 HackerNoon 发布所需的素材，输出到 `~/.blog-workspace/hackernoon/`。
+从 `draft/en-article.md` 读取已翻译好的英文文章，替换图片占位符为 R2 URL，生成 HackerNoon 发布所需的素材，输出到 `~/.blog-workspace/hackernoon/`。
 
 ## 步骤
 
@@ -14,19 +14,27 @@ trigger: "发布文章 <文章名> 到 hackernoon"
 
 从项目根目录读取以下文件：
 
-- **`draft/article.md`**：文章正文（中文）
+- **`draft/en-article.md`**：英文文章正文（含 `<en-image-XX>` 占位标签）
 - **`draft/metadata.md`**：提取：
   - `英文标题` → `en-title`
-  - `en-slug` = `en-title` 转 kebab-case
+  - `# 图片路径` → `## 英文版` 表格中的所有占位符与 URL 对应关系
 
-### 2. 生成元数据
+### 2. 替换图片占位符
 
-阅读文章正文（若为中文，翻译理解后生成英文），生成：
+将正文中所有 `<en-image-XX>` 占位标签替换为对应的 Markdown 图片语法，URL 来自 `metadata.md` 的 **英文版** 图片路径表格：
+
+```markdown
+![](https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{YYYY}/{MM}/{en-slug}/en/0N.png)
+```
+
+### 3. 生成元数据
+
+根据替换后的英文正文，生成：
 
 - **Metadescription**：160 字符以内的英文描述，概括文章核心主题，适合作为 SEO meta description
 - **TL;DR**：2~3 句话的英文摘要，写成一个 paragraph，不分项，让读者快速了解文章的核心观点和结论
 
-### 3. 准备输出目录
+### 4. 准备输出目录
 
 确保 `~/.blog-workspace/hackernoon/` 目录存在：
 
@@ -34,11 +42,19 @@ trigger: "发布文章 <文章名> 到 hackernoon"
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.blog-workspace\hackernoon" | Out-Null
 ```
 
-### 4. 写出元数据文件
+### 5. 写出文章文件
+
+将替换好图片 URL 的完整正文写入 `~/.blog-workspace/hackernoon/article.md`。
+
+### 6. 写出元数据文件
 
 将元数据写入 `~/.blog-workspace/hackernoon/metadata.md`：
 
 ```markdown
+## Title
+
+{en-title}
+
 ## Metadescription
 
 {生成的 metadescription，160 字符以内}
@@ -48,7 +64,7 @@ New-Item -ItemType Directory -Force "$env:USERPROFILE\.blog-workspace\hackernoon
 {生成的 TL;DR}
 ```
 
-### 5. 复制 Banner
+### 7. 复制 en-banner
 
 将 `draft/en-banner.png` 复制到 `~/.blog-workspace/hackernoon/en-banner.png`：
 
@@ -56,19 +72,11 @@ New-Item -ItemType Directory -Force "$env:USERPROFILE\.blog-workspace\hackernoon
 Copy-Item "draft\en-banner.png" "$env:USERPROFILE\.blog-workspace\hackernoon\en-banner.png"
 ```
 
-### 6. 复制插图
+如果 `draft/en-banner.png` 不存在，跳过。
 
-将 `draft/` 下所有 `en-image-*.png` 复制到 `~/.blog-workspace/hackernoon/`：
+### 8. 确认输出
 
-```powershell
-Copy-Item "draft\en-image-*.png" "$env:USERPROFILE\.blog-workspace\hackernoon\"
-```
-
-如果没有 `en-image-*.png`，跳过此步骤。
-
-### 7. 确认输出
-
-列出 `~/.blog-workspace/hackernoon/` 中的文件，告知用户：
-- metadata.md 路径
-- 已复制的图片列表
-- 下一步建议（打开 HackerNoon 编辑器，手动上传图片后替换正文中的图片链接）
+告知用户：
+- `article.md` 路径（正文已替换图片 URL，可直接粘贴到 HackerNoon 编辑器）
+- `metadata.md` 路径
+- 下一步建议（打开 HackerNoon 编辑器，粘贴正文，填写 metadescription 和 TL;DR，手动上传 en-banner）
