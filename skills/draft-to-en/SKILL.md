@@ -29,7 +29,7 @@
 
 ### 全文路线
 
-直接使用 `draft/en-article.md` 的内容作为正文，不做二次翻译或改写。图片占位标签（如 `<en-image-01>`）暂时原样保留，后续步骤回填。
+直接使用 `draft/en-article.md` 的内容作为正文。图片占位标签（如 `<en-image-01>`）暂时原样保留，后续步骤回填。
 
 ### 摘要路线
 
@@ -41,12 +41,10 @@
 - 在正文末尾追加：
 
 ```
-Read the full article on {website_display_name}: {url}
+Read the full article on {website}: {url}
 ```
 
-其中 `website_display_name` 根据 `website` 字段映射：
-- `hackernoon` → `HackerNoon`
-- `infoq` → `InfoQ`
+`website` 和 `url` 直接使用 `metadata.md` 中 `# 首发` 段落的值，不做映射。
 
 ---
 
