@@ -80,21 +80,18 @@ In draft source files, images appear as placeholder tags like `<图片2>`. Repla
 
 ## Draft 目录
 
-每篇文章在发布前对应 `draft/` 下一个独立子文件夹，文件夹名为该文章的**代号**（格式：日期+单词，如 `0606tokenmaxxing`）。
+所有草稿文件位于项目根目录的 `draft/`：
 
-```
-draft/
-└── <代号>/
-    ├── cn-article.md      # 中文正文草稿（追踪于 git）
-    ├── en-article.md      # 英文正文草稿（追踪于 git）
-    ├── metadata.md        # 元数据：中/英标题、中/英分类（追踪于 git）
-    ├── cn-banner.png      # 中文版封面图（gitignore）
-    ├── en-banner.png      # 英文版封面图（gitignore）
-    ├── cn-image-*.png     # 中文版内联插图（gitignore）
-    └── en-image-*.png     # 英文版内联插图（gitignore）
-```
+| 文件 | 说明 |
+|------|------|
+| `draft/article.md` | 文章正文草稿（追踪于 git） |
+| `draft/metadata.md` | 元数据：中/英标题、中/英分类（追踪于 git） |
+| `draft/cn-banner.png` | 中文版封面图（gitignore） |
+| `draft/en-banner.png` | 英文版封面图（gitignore） |
+| `draft/cn-image-*.png` | 中文版内联插图（gitignore） |
+| `draft/en-image-*.png` | 英文版内联插图（gitignore） |
 
-发布时在触发短语中附上代号，skill 会自动读取对应子文件夹。所有发布平台之间没有依赖关系。
+所有发布平台都直接从 `draft/` 读取，平台之间没有依赖关系。
 
 ## Skills
 
@@ -102,10 +99,14 @@ draft/
 
 | 触发短语 | 加载的 SKILL.md |
 |---------|----------------|
-| "prepare:<代号>"、"准备草稿:<代号>" 或类似表述 | `skills/prepare/SKILL.md` |
-| "发布中文版:<代号>" 或类似表述 | `skills/draft-to-zh/SKILL.md` |
-| "发布英文版:<代号>" 或类似表述 | `skills/draft-to-en/SKILL.md` |
-| `发布<网站名>:<代号>` | `skills/<网站名>/SKILL.md` |
+| "prepare"、"准备草稿" 或类似表述 | `skills/prepare/SKILL.md` |
+| "发布中文版" 或类似表述 | `skills/draft-to-zh/SKILL.md` |
+| "发布英文版" 或类似表述 | `skills/draft-to-en/SKILL.md` |
+| "发布到 LinkedIn"、"发布 LinkedIn" 或类似表述 | `skills/linkedin/SKILL.md` |
+| "发布到 CSDN"、"发布 CSDN" 或类似表述 | `skills/csdn/SKILL.md` |
+| "发布到 HackerNoon"、"发布 HackerNoon" 或类似表述 | `skills/hackernoon/SKILL.md` |
+| "发布到掘金"、"发布掘金" 或类似表述 | `skills/juejin/SKILL.md` |
+| "发布到 Dev.to"、"发布 Dev.to" 或类似表述 | `skills/devto/SKILL.md` |
 
 ## 分类映射（英文名）：
 

@@ -1,23 +1,15 @@
 ---
 name: linkedin-publish
 description: 直接从草稿目录为文章生成 LinkedIn 发布所需的素材
-trigger: "发布linkedin:<代号>"
+trigger: "发布到 LinkedIn"
 ---
-
-## 触发格式
-
-```
-发布linkedin:<代号>
-```
-
-触发后，从触发短语中提取 `<代号>`，所有文件路径均以 `draft/<代号>/` 为根目录。
 
 ## 目标
 
-直接从项目的 `draft/<代号>/` 目录读取文章，生成 LinkedIn 发布所需的素材，输出到 `~/.blog-workspace/<代号>/linkedin/` 目录：
-- `metadata.md`：文章标题
+直接从项目的 `draft/` 目录读取文章，生成 LinkedIn 发布所需的素材，输出到 `~/.blog-workspace/linkedin/` 目录：
 - `short-version.md`：英文缩略版帖子
-- `banner.png`：从 `draft/<代号>/` 复制而来
+- `metadata.md`：文章元数据（英文标题）
+- `banner.png`：从 `draft/en-banner.png` 复制后重命名而来
 
 ## 步骤
 
@@ -25,68 +17,62 @@ trigger: "发布linkedin:<代号>"
 
 从项目根目录读取以下文件：
 
-- **`draft/<代号>/cn-article.md`**：文章正文（中文）
-- **`draft/<代号>/metadata.md`**：提取：
+- **`draft/metadata.md`**：提取：
   - `英文标题` → `en-title`
   - `en-slug` = `en-title` 转 kebab-case（冒号及标点去掉或替换为 `-`）
-  - `# 首发` 段落（可选）→ 提取 `website` 和 `url`
 
-### 2. 确定原文链接（Canonical URL）
+### 2. 撰写缩略版正文
 
-检查 `metadata.md` 中是否存在 `# 首发` 段落且 `website` 与 `url` 均有值：
-
-- **首发路线**（有首发信息）：canonical URL = `url` 的值
-- **博客路线**（无首发信息）：canonical URL = `https://CodePlato3721.github.io/en/post/{en-slug}/`
-
-### 3. 撰写缩略版正文
-
-阅读文章全文，撰写适合 LinkedIn 的英文缩略版：
+读取 `draft/en-article.md`，撰写适合 LinkedIn 的英文缩略版：
 
 - 长度：300～500 词
 - 风格：直接、有观点，适合职业社交平台
 - 结构：开门见山抛出核心观点 → 1～2 个关键论据或例子 → 简短结论
-- 结尾固定附上：
+- 结尾按以下优先级决定是否附上链接：
+  1. 如果 `draft/metadata.md` 的「首发」中 `url` 有值，使用该首发 URL
+  2. 如果英文版已发布到本博客（`en-slug` 对应页面存在），使用 `https://CodePlato3721.github.io/en/post/{en-slug}/`
+  3. 以上都没有，则不附链接
 
-```
-Read the full article: {canonical URL}
-```
+  有链接时结尾附上：
 
-> 注：如果英文版尚未发布到个人博客，可在发布后手动确认该链接可访问。
+  ```
+  Read the full article: {URL}
+  ```
 
-### 4. 准备输出目录
+### 3. 准备输出目录
 
-确保 `~/.blog-workspace/<代号>/linkedin/` 目录存在（不存在则新建）：
+确保 `~/.blog-workspace/linkedin/` 目录存在（不存在则新建）：
 
 ```powershell
-New-Item -ItemType Directory -Force "$env:USERPROFILE\.blog-workspace\<代号>\linkedin" | Out-Null
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.blog-workspace\linkedin"
 ```
+
+### 4. 写出 short-version.md
+
+将缩略版内容写入 `~/.blog-workspace/linkedin/short-version.md`。
 
 ### 5. 写出 metadata.md
 
-根据文章正文，生成 **Metadescription**：160 字符以内的英文描述，概括文章核心主题，适合作为 SEO meta description。
+基于 `draft/en-article.md` 生成一段 100 词以内的英文摘要（`short-summary`），概括文章核心观点，语言简洁直接。
 
-将以下内容写入 `~/.blog-workspace/<代号>/linkedin/metadata.md`：
+将以下内容写入 `~/.blog-workspace/linkedin/metadata.md`：
 
 ```markdown
-## Title
+# 英文标题
 {en-title}
 
-## Metadescription
-{生成的 metadescription，160 字符以内}
+# 短摘要
+{short-summary}
 ```
 
-### 6. 写出 short-version.md
+### 6. 复制封面图
 
-将缩略版内容写入 `~/.blog-workspace/<代号>/linkedin/short-version.md`。
-
-### 7. 复制封面图
-
-将 `draft/<代号>/en-banner.png` 复制到输出目录并重命名为 `banner.png`：
+将 `draft/en-banner.png` 复制到 `~/.blog-workspace/linkedin/banner.png`：
 
 ```powershell
-Copy-Item "draft\<代号>\en-banner.png" "$env:USERPROFILE\.blog-workspace\<代号>\linkedin\banner.png"
+Copy-Item "draft\en-banner.png" "$env:USERPROFILE\.blog-workspace\linkedin\banner.png"
 ```
 
-### 8. 确认输出
+### 7. 确认输出
 
-列出 `~/.blog-workspace/<代号>/linkedin/`，确认 `metadata.md`、`short-version.md`、`banner.png` 均已就绪。
+列出 `~/.blog-workspace/linkedin/`，确认 `short-version.md`、`metadata.md` 和 `banner.png` 均已就绪。
