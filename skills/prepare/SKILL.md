@@ -1,6 +1,8 @@
 # Skill: 准备草稿（翻译 + 上传图片）
 
-触发词：用户说"prepare"、"准备草稿"或类似表述时，加载并执行本文件。
+触发词：用户说"prepare:<代号>"、"准备草稿:<代号>"或类似表述时，加载并执行本文件。
+
+触发后，从触发短语中提取 `<代号>`，所有文件路径均以 `draft/<代号>/` 为根目录。
 
 ---
 
@@ -8,8 +10,8 @@
 
 本 skill 做两件事：
 
-1. 将 `draft/cn-article.md` 翻译为英文，输出到 `draft/en-article.md`
-2. 将所有草稿图片上传到 Cloudflare R2，并将占位符与 URL 的对应关系写入 `draft/metadata.md` 中的 **图片路径** 段落
+1. 将 `draft/<代号>/cn-article.md` 翻译为英文，输出到 `draft/<代号>/en-article.md`
+2. 将所有草稿图片上传到 Cloudflare R2，并将占位符与 URL 的对应关系写入 `draft/<代号>/metadata.md` 中的 **图片路径** 段落
 
 两步完成后，所有发布 skill 可直接使用，无需任何额外准备。
 
@@ -17,16 +19,16 @@
 
 ## 前提
 
-- `draft/cn-article.md`：中文文章正文（图片用 `<cn-image-01>` 等占位）
-- `draft/metadata.md`：含 `英文标题` 字段
-- `draft/cn-banner.png`、`draft/en-banner.png`、`draft/cn-image-*.png`、`draft/en-image-*.png`：本地图片文件（gitignore）
+- `draft/<代号>/cn-article.md`：中文文章正文（图片用 `<cn-image-01>` 等占位）
+- `draft/<代号>/metadata.md`：含 `英文标题` 字段
+- `draft/<代号>/cn-banner.png`、`draft/<代号>/en-banner.png`、`draft/<代号>/cn-image-*.png`、`draft/<代号>/en-image-*.png`：本地图片文件（gitignore）
 - wrangler 已通过 `npx wrangler login` 登录
 
 ---
 
 ## 第一步：读取元数据，推导路径变量
 
-读取 `draft/metadata.md`，提取：
+读取 `draft/<代号>/metadata.md`，提取：
 
 - `英文标题` → `en-title`
 
@@ -46,7 +48,7 @@ R2 base 路径：`codeplato-images/{YYYY}/{MM}/{en-slug}`
 
 ## 第二步：翻译 cn-article.md → en-article.md
 
-读取 `draft/cn-article.md`，翻译为英文，写入 `draft/en-article.md`：
+读取 `draft/<代号>/cn-article.md`，翻译为英文，写入 `draft/<代号>/en-article.md`：
 
 - 语言地道、流畅，符合英文博客文体
 - 忠实传达原文的核心观点和结构，允许适当意译
@@ -57,28 +59,28 @@ R2 base 路径：`codeplato-images/{YYYY}/{MM}/{en-slug}`
 
 ## 第三步：上传中文版图片
 
-扫描 `draft/` 下的中文版图片，按顺序上传：
+扫描 `draft/<代号>/` 下的中文版图片，按顺序上传：
 
 ### cn-banner
 
 ```powershell
 npx wrangler r2 object put "codeplato-images/{YYYY}/{MM}/{en-slug}/cn/banner.png" `
-  --file "draft\cn-banner.png" `
+  --file "draft\<代号>\cn-banner.png" `
   --content-type "image/png" `
   --remote
 ```
 
 URL：`https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{YYYY}/{MM}/{en-slug}/cn/banner.png`
 
-如果 `draft/cn-banner.png` 不存在，跳过。
+如果 `draft/<代号>/cn-banner.png` 不存在，跳过。
 
 ### cn-image-*.png
 
-对每一张 `draft/cn-image-0N.png`：
+对每一张 `draft/<代号>/cn-image-0N.png`：
 
 ```powershell
 npx wrangler r2 object put "codeplato-images/{YYYY}/{MM}/{en-slug}/cn/0N.png" `
-  --file "draft\cn-image-0N.png" `
+  --file "draft\<代号>\cn-image-0N.png" `
   --content-type "image/png" `
   --remote
 ```
@@ -95,22 +97,22 @@ URL：`https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{YYYY}/{MM}/{en-slug}
 
 ```powershell
 npx wrangler r2 object put "codeplato-images/{YYYY}/{MM}/{en-slug}/en/banner.png" `
-  --file "draft\en-banner.png" `
+  --file "draft\<代号>\en-banner.png" `
   --content-type "image/png" `
   --remote
 ```
 
 URL：`https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{YYYY}/{MM}/{en-slug}/en/banner.png`
 
-如果 `draft/en-banner.png` 不存在，跳过。
+如果 `draft/<代号>/en-banner.png` 不存在，跳过。
 
 ### en-image-*.png
 
-对每一张 `draft/en-image-0N.png`：
+对每一张 `draft/<代号>/en-image-0N.png`：
 
 ```powershell
 npx wrangler r2 object put "codeplato-images/{YYYY}/{MM}/{en-slug}/en/0N.png" `
-  --file "draft\en-image-0N.png" `
+  --file "draft\<代号>\en-image-0N.png" `
   --content-type "image/png" `
   --remote
 ```
@@ -121,9 +123,9 @@ URL：`https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{YYYY}/{MM}/{en-slug}
 
 ---
 
-## 第五步：更新 draft/metadata.md
+## 第五步：更新 draft/<代号>/metadata.md
 
-在 `draft/metadata.md` 末尾写入（或覆盖已有的）`# 图片路径` 段落：
+在 `draft/<代号>/metadata.md` 末尾写入（或覆盖已有的）`# 图片路径` 段落：
 
 ```markdown
 # 图片路径
@@ -153,7 +155,7 @@ URL：`https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{YYYY}/{MM}/{en-slug}
 
 告知用户：
 
-- `draft/en-article.md` 已生成
+- `draft/<代号>/en-article.md` 已生成
 - 所有已上传的图片及其 R2 URL
-- `draft/metadata.md` 已更新
+- `draft/<代号>/metadata.md` 已更新
 - 下一步建议（发布中文版、英文版或各平台）

@@ -1,12 +1,22 @@
 ---
 name: hackernoon-prepare
-description: 从 draft/en-article.md 生成 HackerNoon 发布素材，替换图片占位符为 R2 URL
-trigger: "发布hackernoon"
+description: 从 draft/<代号>/en-article.md 生成 HackerNoon 发布素材，替换图片占位符为 R2 URL
+trigger: "发布hackernoon:<draft代号>"
 ---
+
+## 触发格式
+
+```
+发布hackernoon:<代号>
+```
+
+例：`发布hackernoon:0606tokenmaxxing`
+
+触发后，从触发短语中提取 `<代号>`，所有文件路径均以 `draft/<代号>/` 为根目录。
 
 ## 目标
 
-从 `draft/en-article.md` 读取已翻译好的英文文章，替换图片占位符为 R2 URL，生成 HackerNoon 发布所需的素材，输出到 `~/.blog-workspace/hackernoon/`。
+从 `draft/<代号>/en-article.md` 读取已翻译好的英文文章，替换图片占位符为 R2 URL，生成 HackerNoon 发布所需的素材，输出到 `~/.blog-workspace/hackernoon/`。
 
 ## 步骤
 
@@ -14,8 +24,8 @@ trigger: "发布hackernoon"
 
 从项目根目录读取以下文件：
 
-- **`draft/en-article.md`**：英文文章正文（含 `<en-image-XX>` 占位标签）
-- **`draft/metadata.md`**：提取：
+- **`draft/<代号>/en-article.md`**：英文文章正文（含 `<en-image-XX>` 占位标签）
+- **`draft/<代号>/metadata.md`**：提取：
   - `英文标题` → `en-title`
   - `# 图片路径` → `## 英文版` 表格中的所有占位符与 URL 对应关系
 
@@ -36,19 +46,19 @@ trigger: "发布hackernoon"
 
 ### 4. 准备输出目录
 
-确保 `~/.blog-workspace/hackernoon/` 目录存在：
+确保 `~/.blog-workspace/<代号>/hackernoon/` 目录存在：
 
 ```powershell
-New-Item -ItemType Directory -Force "$env:USERPROFILE\.blog-workspace\hackernoon" | Out-Null
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.blog-workspace\<代号>\hackernoon" | Out-Null
 ```
 
 ### 5. 写出文章文件
 
-将替换好图片 URL 的完整正文写入 `~/.blog-workspace/hackernoon/article.md`。
+将替换好图片 URL 的完整正文写入 `~/.blog-workspace/<代号>/hackernoon/article.md`。
 
 ### 6. 写出元数据文件
 
-将元数据写入 `~/.blog-workspace/hackernoon/metadata.md`：
+将元数据写入 `~/.blog-workspace/<代号>/hackernoon/metadata.md`：
 
 ```markdown
 ## Title
@@ -66,13 +76,13 @@ New-Item -ItemType Directory -Force "$env:USERPROFILE\.blog-workspace\hackernoon
 
 ### 7. 复制 en-banner
 
-将 `draft/en-banner.png` 复制到 `~/.blog-workspace/hackernoon/en-banner.png`：
+将 `draft/<代号>/en-banner.png` 复制到 `~/.blog-workspace/<代号>/hackernoon/en-banner.png`：
 
 ```powershell
-Copy-Item "draft\en-banner.png" "$env:USERPROFILE\.blog-workspace\hackernoon\en-banner.png"
+Copy-Item "draft\<代号>\en-banner.png" "$env:USERPROFILE\.blog-workspace\<代号>\hackernoon\en-banner.png"
 ```
 
-如果 `draft/en-banner.png` 不存在，跳过。
+如果 `draft/<代号>/en-banner.png` 不存在，跳过。
 
 ### 8. 确认输出
 
