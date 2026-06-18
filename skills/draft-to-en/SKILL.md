@@ -12,41 +12,92 @@
 
 读取 `draft/<代号>/metadata.md`，提取：
 
-- `英文标题` → `en-title`
-- `英文分类` → `en-category`
-- `# 图片路径` → `## 英文版` 表格中的占位符与 URL 对应关系
+- **`draft/en-article.md`**：读取全文作为英文正文（已翻译好，直接使用）
+- **`draft/metadata.md`**：提取：
+  - `英文分类` 字段 → 映射为英文分类名
+  - `英文标题` 字段 → 作为文章英文标题（`en-title`）
+  - `# 首发` 段落（可选）→ 提取 `website` 和 `url`
 
 ---
 
-## 第二步：推导路径变量
+## 第二步：判断发布路线
 
-| 变量 | 说明 |
-|------|------|
-| `en-slug` | `en-title` 转 kebab-case（非字母字符替换为 `-`，转小写，合并连续 `-`，去首尾 `-`） |
-| `date` | 今天的日期，格式 `YYYY-MM-DD` |
-| `YYYY/MM` | 从 date 拆出，用于 R2 路径 |
+检查 `metadata.md` 中是否存在 `# 首发` 段落且包含 `website` 和 `url`：
+
+- **有首发信息** → 走**摘要路线**（见下）
+- **无首发信息** → 走**全文路线**（现有流程，继续第三步）
 
 ---
 
-## 第三步：读取草稿并回填 URL
+## 第三步：撰写英文文章正文
 
-读取 `draft/<代号>/en-article.md`，将正文中所有图片占位标签替换为对应 R2 URL：
+### 全文路线
 
-- 占位标签与 URL 的对应关系来自 `metadata.md` 的 `## 英文版` 表格
-- Banner URL 同样来自该表格中的 `en-banner` 行
+直接使用 `draft/en-article.md` 的内容作为正文。图片占位标签（如 `<en-image-01>`）暂时原样保留，后续步骤回填。
 
-示例替换：
+### 摘要路线
 
-| 占位标签 | 替换为 |
-|---------|--------|
-| `<en-image-01>` | `![description](https://…/{en-slug}/en/01.png)` |
-| `<en-image-02>` | `![description](https://…/{en-slug}/en/02.png)` |
+基于 `draft/en-article.md` 的内容，生成**较短的摘要版**正文：
+
+- 提炼文章的核心观点，保留最重要的论据和结论
+- 篇幅控制在全文的 1/3 左右，让读者理解文章在讲什么，但不替代完整阅读
+- **不包含**图片占位标签（摘要版不上传图片）
+- 在正文末尾追加：
+
+```
+Read the full article on {website}: {url}
+```
+
+`website` 和 `url` 直接使用 `metadata.md` 中 `# 首发` 段落的值，不做映射。
 
 ---
 
 ## 第四步：生成文章并写入
 
-组装完整文章，写入 `content/en/post/{en-slug}/index.md`：
+**全文路线**和**摘要路线**均需上传 banner。
+
+英文 banner 文件：`draft/en-banner.png`
+
+R2 路径：`{YYYY}/{MM}/{en-slug}/en/banner.png`
+
+```powershell
+npx wrangler r2 object put "codeplato-images/{YYYY}/{MM}/{en-slug}/en/banner.png" `
+  --file "draft\en-banner.png" `
+  --content-type "image/png" `
+  --remote
+```
+
+Banner URL：`https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{YYYY}/{MM}/{en-slug}/en/banner.png`
+
+---
+
+## 第五步：上传英文内联图片（仅全文路线）
+
+**摘要路线跳过此步骤。**
+
+草稿目录中的英文图片命名规则为 `draft/en-image-01.png`、`draft/en-image-02.png` 等，对应正文中的 `<en-image-01>`、`<en-image-02>` 占位标签。
+
+对每一张图片：
+
+1. R2 路径：`{YYYY}/{MM}/{en-slug}/en/0N.png`
+2. 上传命令：
+
+```powershell
+npx wrangler r2 object put "codeplato-images/{YYYY}/{MM}/{en-slug}/en/0N.png" `
+  --file "draft\en-image-0N.png" `
+  --content-type "image/png" `
+  --remote
+```
+
+3. URL：`https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{YYYY}/{MM}/{en-slug}/en/0N.png`
+
+---
+
+## 第六步：回填 URL，组装最终文章
+
+### 全文路线
+
+将正文中所有占位标签替换为对应的 Markdown 图片语法后，组装 frontmatter：
 
 ```yaml
 ---
@@ -59,14 +110,23 @@ categories: ["{en-category}"]
 ---
 ```
 
-tags 根据文章内容自行判断，3～5 个英文标签。
+### 摘要路线
+
+无需回填图片。直接组装 frontmatter（与全文路线格式相同，banner 照常使用）。
 
 ---
 
 ## 第五步：确认
 
-告知用户：
-- 写入的文件路径
+将最终文章写入：
+
+```
+content/en/post/{en-slug}/index.md
+```
+
+写入后，告知用户：
+- 文件路径
+- 发布路线（全文 / 摘要）
 - Banner URL
-- 所有内联图片 URL
-- 下一步建议（commit & push、检查预览）
+- 全文路线：所有内联图片 URL
+- 下一步建议（如：commit & push、检查预览）
