@@ -1,6 +1,6 @@
 ---
 name: juejin-publish
-description: 为草稿目录中的文章生成掘金发布所需的元数据和简化版草稿
+description: 为草稿目录中的文章生成掘金发布所需的元数据和草稿（图片占位符回填 R2 URL）
 trigger: "发布juejin:<代号>"
 ---
 
@@ -26,6 +26,7 @@ trigger: "发布juejin:<代号>"
 - **`draft/<代号>/metadata.md`**：提取：
   - `中文标题` → `zh-title`
   - `中文分类` → 收录至专栏
+  - `# 图片路径` → `## 中文版` 表格中的占位符与 R2 URL 对应关系（用于步骤 5 回填）
 
 ### 2. 生成文章摘要
 
@@ -41,7 +42,7 @@ New-Item -ItemType Directory -Force "$env:USERPROFILE\.blog-workspace\<代号>\j
 
 ### 4. 写出元数据文件
 
-将以下内容写入 `~/.blog-workspace/<代号>/juejin/元数据.md`：
+将以下内容写入 `~/.blog-workspace/<代号>/juejin/metadata.md`：
 
 ```markdown
 # 中文标题
@@ -54,23 +55,23 @@ New-Item -ItemType Directory -Force "$env:USERPROFILE\.blog-workspace\<代号>\j
 {中文分类}
 ```
 
-### 5. 生成简化版草稿
+### 5. 生成草稿（回填 R2 图片 URL）
 
-读取 `draft/<代号>/cn-article.md` 正文，生成简化版文章，写入 `~/.blog-workspace/<代号>/juejin/草稿.md`。
+读取 `draft/<代号>/cn-article.md` 正文，将图片占位标签替换为对应 R2 URL，原样写入 `~/.blog-workspace/<代号>/juejin/article.md`。
 
-简化规则：
-- **适度简化文字**：对篇幅较长的说明段落，精简表述，去掉冗余；但保留核心观点，不改变含义
-- **保留不简化的内容**：代码块、示例、表格、列表条目——这类内容结构固定，原样保留
-- **图片占位符**：将 `<cn-image-XX>` 占位标签原样保留（掘金编辑器上传图片后再替换）
+**图片回填规则**：
+- 占位标签与 URL 的对应关系来自 `metadata.md` 的 `## 中文版` 表格
+- `<cn-image-01>` → `![](https://…/cn/01.png)`（标准 Markdown 图片语法，描述留空即可）
+- 以此类推，将所有 `<cn-image-XX>` 替换为对应 R2 URL
 
 ### 6. 复制封面图
 
-将 `draft/<代号>/cn-banner.png` 复制到 `~/.blog-workspace/<代号>/juejin/cn-banner.png`：
+将 `draft/<代号>/cn-banner.png` 复制到输出目录并重命名为 `banner.png`：
 
 ```powershell
-Copy-Item "draft\<代号>\cn-banner.png" "$env:USERPROFILE\.blog-workspace\<代号>\juejin\cn-banner.png"
+Copy-Item "draft\<代号>\cn-banner.png" "$env:USERPROFILE\.blog-workspace\<代号>\juejin\banner.png"
 ```
 
 ### 7. 确认输出
 
-列出 `~/.blog-workspace/<代号>/juejin/`，确认 `元数据.md`、`草稿.md`、`cn-banner.png` 均已就绪。
+列出 `~/.blog-workspace/<代号>/juejin/`，确认 `metadata.md`、`article.md`、`banner.png` 均已就绪。

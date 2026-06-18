@@ -15,8 +15,9 @@ trigger: "发布linkedin:<代号>"
 ## 目标
 
 直接从项目的 `draft/<代号>/` 目录读取文章，生成 LinkedIn 发布所需的素材，输出到 `~/.blog-workspace/<代号>/linkedin/` 目录：
+- `metadata.md`：文章标题
 - `short-version.md`：英文缩略版帖子
-- `en-banner.png`：从 `draft/<代号>/` 复制而来
+- `banner.png`：从 `draft/<代号>/` 复制而来
 
 ## 步骤
 
@@ -28,10 +29,16 @@ trigger: "发布linkedin:<代号>"
 - **`draft/<代号>/metadata.md`**：提取：
   - `英文标题` → `en-title`
   - `en-slug` = `en-title` 转 kebab-case（冒号及标点去掉或替换为 `-`）
+  - `# 首发` 段落（可选）→ 提取 `website` 和 `url`
 
-canonical URL 格式：`https://CodePlato3721.github.io/en/post/{en-slug}/`
+### 2. 确定原文链接（Canonical URL）
 
-### 2. 撰写缩略版正文
+检查 `metadata.md` 中是否存在 `# 首发` 段落且 `website` 与 `url` 均有值：
+
+- **首发路线**（有首发信息）：canonical URL = `url` 的值
+- **博客路线**（无首发信息）：canonical URL = `https://CodePlato3721.github.io/en/post/{en-slug}/`
+
+### 3. 撰写缩略版正文
 
 阅读文章全文，撰写适合 LinkedIn 的英文缩略版：
 
@@ -46,7 +53,7 @@ Read the full article: {canonical URL}
 
 > 注：如果英文版尚未发布到个人博客，可在发布后手动确认该链接可访问。
 
-### 3. 准备输出目录
+### 4. 准备输出目录
 
 确保 `~/.blog-workspace/<代号>/linkedin/` 目录存在（不存在则新建）：
 
@@ -54,18 +61,32 @@ Read the full article: {canonical URL}
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.blog-workspace\<代号>\linkedin" | Out-Null
 ```
 
-### 4. 写出 short-version.md
+### 5. 写出 metadata.md
+
+根据文章正文，生成 **Metadescription**：160 字符以内的英文描述，概括文章核心主题，适合作为 SEO meta description。
+
+将以下内容写入 `~/.blog-workspace/<代号>/linkedin/metadata.md`：
+
+```markdown
+## Title
+{en-title}
+
+## Metadescription
+{生成的 metadescription，160 字符以内}
+```
+
+### 6. 写出 short-version.md
 
 将缩略版内容写入 `~/.blog-workspace/<代号>/linkedin/short-version.md`。
 
-### 5. 复制封面图
+### 7. 复制封面图
 
-将 `draft/<代号>/en-banner.png` 复制到 `~/.blog-workspace/<代号>/linkedin/en-banner.png`：
+将 `draft/<代号>/en-banner.png` 复制到输出目录并重命名为 `banner.png`：
 
 ```powershell
-Copy-Item "draft\<代号>\en-banner.png" "$env:USERPROFILE\.blog-workspace\<代号>\linkedin\en-banner.png"
+Copy-Item "draft\<代号>\en-banner.png" "$env:USERPROFILE\.blog-workspace\<代号>\linkedin\banner.png"
 ```
 
-### 6. 确认输出
+### 8. 确认输出
 
-列出 `~/.blog-workspace/<代号>/linkedin/`，确认 `short-version.md` 和 `en-banner.png` 均已就绪。
+列出 `~/.blog-workspace/<代号>/linkedin/`，确认 `metadata.md`、`short-version.md`、`banner.png` 均已就绪。
