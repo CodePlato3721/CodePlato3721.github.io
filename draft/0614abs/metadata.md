@@ -10,6 +10,10 @@ AI时代的开发范式：ABS
 # 英文标题
 From Code to ABS: A New Development Paradigm for the AI Era
 
+# 首发
+website=Hackernoon
+url=https://hackernoon.com/agent-behavior-specification-a-new-development-for-the-ai-era
+
 # 图片路径
 
 ## 中文版
