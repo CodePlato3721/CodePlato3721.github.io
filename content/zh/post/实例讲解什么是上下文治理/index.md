@@ -4,7 +4,7 @@ date: 2026-05-19
 draft: false
 image: https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/2026/05/what-is-context-governance/banner.png
 tags: ["AI", "Agent", "上下文工程", "Context Engineering"]
-categories: ["AI哲学"]
+categories: ["AI 哲学"]
 ---
 
 上下文治理（Context Governance）是上下文工程（Context Engineering）中的一个部分。但我觉得，上下文治理是上下文工程里最有意思的部分。

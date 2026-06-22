@@ -4,7 +4,7 @@ date: 2026-06-06
 draft: false
 image: https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/2026/06/why-the-tokenmaxxing-leaderboard-might-be-backwards/banner.png
 tags: ["LLM", "AI编程", "Token", "上下文工程", "Claude Code"]
-categories: ["AI哲学"]
+categories: ["AI 哲学"]
 ---
 
 嗯，我承认这个标题有点夸张了。当你把不用 AI 写代码的人排除掉之后，确实有可能出现一种情况：Token 使用量更少的人，反而生产效率更高。我讲一个故事，你们可能就开始有点理解了。

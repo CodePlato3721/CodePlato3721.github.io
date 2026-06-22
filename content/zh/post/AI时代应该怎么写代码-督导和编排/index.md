@@ -4,7 +4,7 @@ date: 2026-05-20
 draft: false
 image: https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/2026/05/coding-in-ai-era-supervision-and-orchestration/banner.png
 tags: ["AI编程", "LLM", "程序员", "Vibe Coding", "Agent"]
-categories: ["AI哲学"]
+categories: ["AI 哲学"]
 ---
 
 ## 程序员的迷茫

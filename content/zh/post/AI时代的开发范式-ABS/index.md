@@ -4,7 +4,7 @@ date: 2026-06-16
 draft: false
 image: https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/2026/06/from-code-to-abs-a-new-development-paradigm-for-the-ai-era/cn/banner.png
 tags: ["AI编程", "ABS", "Agent", "软件工程", "Vibe Coding"]
-categories: ["AI哲学"]
+categories: ["AI 哲学"]
 ---
 
 # AI时代的开发范式：ABS

@@ -4,7 +4,7 @@ date: 2026-05-14
 draft: false
 image: https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/2026/05/ai-interview-in-the-ai-era/banner.png
 tags: ["AI", "面试"]
-categories: ["AI方法论"]
+categories: ["AI 方法论"]
 ---
 
 ## 背景

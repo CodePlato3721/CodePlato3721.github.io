@@ -4,7 +4,7 @@ date: 2026-05-25
 draft: false
 image: https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/2026/05/do-we-still-need-to-practice-programming-in-the-ai-era/banner.png
 tags: ["AI", "编程", "Vibe Coding", "学习", "程序员"]
-categories: ["AI哲学"]
+categories: ["AI 哲学"]
 ---
 
 AI时代已经开始流行所谓的 "Vibe Coding" 了，那么还有必要练习编程吗？
