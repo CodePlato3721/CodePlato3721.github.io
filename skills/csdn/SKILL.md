@@ -73,6 +73,18 @@ Copy-Item "draft\<代号>\cn-article.md" "$env:USERPROFILE\.blog-workspace\<代�
 
 以此类推，将所有 `<cn-image-XX>` 替换为对应 R2 URL。
 
+**追加结尾签名**
+
+在 `article.md` 末尾追加以下固定内容：
+
+```powershell
+$dst = "$env:USERPROFILE\.blog-workspace\<代号>\csdn\article.md"
+$article = [System.IO.File]::ReadAllText($dst, [System.Text.Encoding]::UTF8)
+$footer = "`n`n---`n`n## 关于作者`n`n我是代码Plato。`n`n我相信，人类的创造力才是 AI Coding 的真实之树，而代码与模型不过是投射在洞穴墙上的影子。`n`n微博：@代码Plato`n主页：https://weibo.com/u/1041257881"
+$article = $article.TrimEnd() + $footer
+[System.IO.File]::WriteAllText($dst, $article, (New-Object System.Text.UTF8Encoding $false))
+```
+
 ### 6. 复制封面图
 
 将 `draft/<代号>/cn-banner.png` 复制到输出目录并重命名为 `banner.png`：

@@ -66,6 +66,17 @@ categories: ["{en-category}"]
 ---
 
 {替换好图片 URL 的英文正文}
+
+---
+
+## About the Author
+
+I'm CodePlato.
+
+I believe human creativity is the true tree of AI Coding. Code and models are only shadows projected onto the walls of the cave.
+
+X: @codeplato2026
+https://x.com/codeplato2026
 ```
 
 ### 5. 运行发布脚本

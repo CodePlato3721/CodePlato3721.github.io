@@ -54,7 +54,20 @@ New-Item -ItemType Directory -Force "$env:USERPROFILE\.blog-workspace\<代号>\h
 
 ### 5. 写出文章文件
 
-将替换好图片 URL 的完整正文写入 `~/.blog-workspace/<代号>/hackernoon/article.md`。
+将替换好图片 URL 的完整正文写入 `~/.blog-workspace/<代号>/hackernoon/article.md`，在正文末尾追加以下签名：
+
+```
+---
+
+## About the Author
+
+I'm CodePlato.
+
+I believe human creativity is the true tree of AI Coding. Code and models are only shadows projected onto the walls of the cave.
+
+X: @codeplato2026
+https://x.com/codeplato2026
+```
 
 ### 6. 写出元数据文件
 

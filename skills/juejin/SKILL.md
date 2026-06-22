@@ -84,12 +84,13 @@ $zhDir = Get-ChildItem "content\zh\post" -Directory | Where-Object {
 $url = "https://CodePlato3721.github.io/zh/post/$zhDir/"
 ```
 
-在 `article.md` 末尾追加该链接（与正文之间空一行）：
+在 `article.md` 末尾追加原文链接和结尾签名：
 
 ```powershell
 $dst = "$env:USERPROFILE\.blog-workspace\juejin\article.md"
 $article = [System.IO.File]::ReadAllText($dst, [System.Text.Encoding]::UTF8)
-$article = $article.TrimEnd() + "`n`n原文：$url"
+$footer = "`n`n---`n`n## 关于作者`n`n我是代码Plato。`n`n我相信，人类的创造力才是 AI Coding 的真实之树，而代码与模型不过是投射在洞穴墙上的影子。`n`n微博：@代码Plato`n主页：https://weibo.com/u/1041257881"
+$article = $article.TrimEnd() + "`n`n原文：$url" + $footer
 [System.IO.File]::WriteAllText($dst, $article, (New-Object System.Text.UTF8Encoding $false))
 ```
 
