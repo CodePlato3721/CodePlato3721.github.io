@@ -112,9 +112,9 @@ In draft source files, images appear as placeholder tags like `<图片2>`. Repla
 
 | 类别 | categories |
 |------|-----------|
-| AI日常使用手册 | Daily AI Usage |
-| AI工程开发手册 | AI Engineering |
-| AI  Skill 开发手册 | AI Skill Dev |
-| AI哲学 | AI Philosophy |
-| AI方法论 | AI Methodology |
+| AI 的日常使用手册 | Daily AI Usage |
+| AI 工程开发手册 | AI Engineering |
+| AI Skill 开发手册 | AI Skill Dev |
+| AI 哲学 | AI Philosophy |
+| AI 方法论 | AI Methodology |
 | 软件哲学 | Software Philosophy |
