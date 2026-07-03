@@ -21,6 +21,13 @@
   weight = 2
   params = {icon = "brand-twitter", newTab = true}
 
+[[en.menus.social]]
+  identifier = "rss"
+  name = "RSS"
+  url = "/index.xml"
+  weight = 3
+  params = {icon = "rss"}
+
 [zh]
   languageName = "简体中文"
   weight = 2
@@ -43,3 +50,10 @@
   url = "https://www.weibo.com/u/1041257881"
   weight = 2
   params = {icon = "brand-weibo", newTab = true}
+
+[[zh.menus.social]]
+  identifier = "rss"
+  name = "RSS"
+  url = "/zh/index.xml"
+  weight = 3
+  params = {icon = "rss"}
