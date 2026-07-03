@@ -11,7 +11,7 @@ import frontmatter
 import requests
 from dotenv import load_dotenv
 
-load_dotenv(Path(__file__).parent.parent / ".env")
+load_dotenv(Path(__file__).parent.parent.parent / ".env")
 
 BASE_URL = "https://CodePlato3721.github.io/"
 DEVTO_API = "https://dev.to/api/articles"
