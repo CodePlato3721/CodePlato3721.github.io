@@ -12,7 +12,7 @@ Money-Saving Tips Every OpenClaw User Should Know
 
 # 首发
 website=Hackernoon
-url=
+url=https://hackernoon.com/money-saving-tips-every-openclaw-user-should-know
 
 # 图片路径
 
