@@ -155,7 +155,7 @@ url=https://hackernoon.com/money-saving-tips-every-openclaw-user-should-know
 | "prepare"、"准备草稿" 或类似表述 | `skills/prepare/SKILL.md` |
 | "发布中文版" 或类似表述 | `skills/draft-to-zh/SKILL.md` |
 | "发布英文版" 或类似表述 | `skills/draft-to-en/SKILL.md` |
-| "发布到 LinkedIn"、"发布 LinkedIn" 或类似表述 | `skills/linkedin/SKILL.md` |
+| "发布linkedin:<代号>" 或类似表述 | `skills/linkedin/SKILL.md` |
 | "发布到 CSDN"、"发布 CSDN" 或类似表述 | `skills/csdn/SKILL.md` |
 | "发布到 HackerNoon"、"发布 HackerNoon" 或类似表述 | `skills/hackernoon/SKILL.md` |
 | "发布到掘金"、"发布掘金" 或类似表述 | `skills/juejin/SKILL.md` |
