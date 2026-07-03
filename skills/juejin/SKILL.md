@@ -1,12 +1,20 @@
 ---
 name: juejin-publish
 description: 为草稿目录中的文章生成掘金发布所需的元数据和简化版草稿
-trigger: "发布到掘金"
+trigger: "发布juejin:<代号>"
 ---
+
+## 触发格式
+
+```
+发布juejin:<代号>
+```
+
+触发后，从触发短语中提取 `<代号>`，所有文件路径均以 `draft/<代号>/` 为根目录。
 
 ## 目标
 
-直接从项目的 `draft/` 目录读取文章，生成掘金发布所需的全部素材，输出到 `~/.blog-workspace/juejin/` 目录。
+直接从项目的 `draft/<代号>/` 目录读取文章，生成掘金发布所需的全部素材，输出到 `~/.blog-workspace/<代号>/juejin/` 目录。
 
 ## 步骤
 
@@ -14,7 +22,7 @@ trigger: "发布到掘金"
 
 从项目根目录读取以下文件：
 
-- **`draft/metadata.md`**：提取：
+- **`draft/<代号>/metadata.md`**：提取：
   - `中文标题` → `zh-title`
   - `中文分类` → 收录至专栏
 
@@ -24,11 +32,15 @@ trigger: "发布到掘金"
 
 ### 3. 准备输出目录
 
-确保 `~/.blog-workspace/juejin/` 目录存在（不存在则新建）。
+确保 `~/.blog-workspace/<代号>/juejin/` 目录存在（不存在则新建）：
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.blog-workspace\<代号>\juejin" | Out-Null
+```
 
 ### 4. 写出元数据文件
 
-将以下内容写入 `~/.blog-workspace/juejin/metadata.md`：
+将以下内容写入 `~/.blog-workspace/<代号>/juejin/metadata.md`：
 
 ```markdown
 # 中文标题
@@ -43,13 +55,13 @@ trigger: "发布到掘金"
 
 ### 5. 制作文章
 
-将 `draft/cn-article.md` 复制并改名为 `~/.blog-workspace/juejin/article.md`：
+将 `draft/<代号>/cn-article.md` 复制并改名为 `~/.blog-workspace/<代号>/juejin/article.md`：
 
 ```powershell
-Copy-Item "draft\cn-article.md" "$env:USERPROFILE\.blog-workspace\juejin\article.md"
+Copy-Item "draft\<代号>\cn-article.md" "$env:USERPROFILE\.blog-workspace\<代号>\juejin\article.md"
 ```
 
-然后读取 `draft/metadata.md` 中 **`## 中文版`** 表格，将 `article.md` 中的图片占位符替换为对应的 R2 URL。
+然后读取 `draft/<代号>/metadata.md` 中 **`## 中文版`** 表格，将 `article.md` 中的图片占位符替换为对应的 R2 URL。
 
 表格格式为 `| 占位符 | R2 URL |`，例如：
 
@@ -62,7 +74,7 @@ Copy-Item "draft\cn-article.md" "$env:USERPROFILE\.blog-workspace\juejin\article
 **重要：必须用 `[System.IO.File]` 显式指定 UTF-8 编码**，否则 PowerShell 5.1 的 `Get-Content` 默认用 ANSI 编码读取，导致中文乱码：
 
 ```powershell
-$dst = "$env:USERPROFILE\.blog-workspace\juejin\article.md"
+$dst = "$env:USERPROFILE\.blog-workspace\<代号>\juejin\article.md"
 $article = [System.IO.File]::ReadAllText($dst, [System.Text.Encoding]::UTF8)
 $article = $article -replace [regex]::Escape("<cn-image-01>"), "![](https://...)"
 # 以此类推，对每个占位符执行替换
@@ -87,7 +99,7 @@ $url = "https://CodePlato3721.github.io/zh/post/$zhDir/"
 在 `article.md` 末尾追加原文链接和结尾签名：
 
 ```powershell
-$dst = "$env:USERPROFILE\.blog-workspace\juejin\article.md"
+$dst = "$env:USERPROFILE\.blog-workspace\<代号>\juejin\article.md"
 $article = [System.IO.File]::ReadAllText($dst, [System.Text.Encoding]::UTF8)
 $footer = "`n`n---`n`n## 关于作者`n`n我是代码Plato。`n`n我相信，人类的创造力才是 AI Coding 的真实之树，而代码与模型不过是投射在洞穴墙上的影子。`n`n微博：@代码Plato`n主页：https://weibo.com/u/1041257881"
 $article = $article.TrimEnd() + "`n`n原文：$url" + $footer
@@ -97,12 +109,12 @@ $article = $article.TrimEnd() + "`n`n原文：$url" + $footer
 
 ### 6. 复制封面图
 
-将 `draft/cn-banner.png` 复制到 `~/.blog-workspace/juejin/banner.png`：
+将 `draft/<代号>/cn-banner.png` 复制到 `~/.blog-workspace/<代号>/juejin/banner.png`：
 
 ```powershell
-Copy-Item "draft\cn-banner.png" "$env:USERPROFILE\.blog-workspace\juejin\banner.png"
+Copy-Item "draft\<代号>\cn-banner.png" "$env:USERPROFILE\.blog-workspace\<代号>\juejin\banner.png"
 ```
 
 ### 7. 确认输出
 
-列出 `~/.blog-workspace/juejin/`，确认 `metadata.md`、`article.md`、`banner.png` 均已就绪。
+列出 `~/.blog-workspace/<代号>/juejin/`，确认 `metadata.md`、`article.md`、`banner.png` 均已就绪。
