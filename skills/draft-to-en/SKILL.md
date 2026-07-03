@@ -114,20 +114,7 @@ categories: ["{en-category}"]
 
 无需回填图片。直接组装 frontmatter（与全文路线格式相同，banner 照常使用）。
 
-**两条路线均需**在正文末尾追加以下签名：
-
-```
----
-
-## About the Author
-
-I'm CodePlato.
-
-I believe human creativity is the true tree of AI Coding. Code and models are only shadows projected onto the walls of the cave.
-
-X: @codeplato2026
-https://x.com/codeplato2026
-```
+不追加作者签名（签名已手动配置在 dev.to 和 HackerNoon 的个人 profile 中）。
 
 ---
 

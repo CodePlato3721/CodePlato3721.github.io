@@ -93,6 +93,59 @@ In draft source files, images appear as placeholder tags like `<图片2>`. Repla
 
 所有发布平台都直接从 `draft/` 读取，平台之间没有依赖关系。
 
+## Draft 中的 metadata.md 格式
+
+`draft/<代号>/metadata.md` 记录该篇文章的元数据。
+
+| 段落 | 说明 |
+|------|------|
+| `# 中文分类` | 中文分类名，取值见「分类映射」表 |
+| `# 英文分类` | 英文分类名，取值见「分类映射」表 |
+| `# 中文标题` | 文章中文标题 |
+| `# 英文标题` | 文章英文标题（`en-title`） |
+| `# 首发`（可选） | 若该文章此前已在其他平台首发过，记录 `website=` 和 `url=` |
+| `# Hackernoon`（可选） | 英文版发布到自己博客和 Dev.to 后，等待 HackerNoon 抓取 RSS 自动发布；过几天 HackerNoon 发布后，手动把文章链接填入 `url=`，供后续生成 LinkedIn 文章时使用 |
+| `# 图片路径` | 包含 `## 中文版` 和 `## 英文版` 两个表格，记录占位符与 R2 URL 的对应关系 |
+
+示例：
+
+```markdown
+# 中文分类
+AI 方法论
+
+# 英文分类
+AI Methodology
+
+# 中文标题
+Openclaw玩家必学的省钱小技巧
+
+# 英文标题
+Money-Saving Tips Every OpenClaw User Should Know
+
+# 首发
+website=
+url=
+
+# Hackernoon
+url=https://hackernoon.com/money-saving-tips-every-openclaw-user-should-know
+
+# 图片路径
+
+## 中文版
+
+| 占位符 | R2 URL |
+|--------|--------|
+| cn-banner | https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{YYYY}/{MM}/{en-slug}/cn/banner.png |
+| `<cn-image-01>` | https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{YYYY}/{MM}/{en-slug}/cn/01.png |
+
+## 英文版
+
+| 占位符 | R2 URL |
+|--------|--------|
+| en-banner | https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{YYYY}/{MM}/{en-slug}/en/banner.png |
+| `<en-image-01>` | https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{YYYY}/{MM}/{en-slug}/en/01.png |
+```
+
 ## Skills
 
 所有 skill 文件位于 `skills/<skill-name>/SKILL.md`。遇到以下触发短语时，读取对应 SKILL.md 并按其中步骤执行。
