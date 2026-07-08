@@ -15,7 +15,7 @@ website=
 url=
 
 # Hackernoon
-url=
+url=https://hackernoon.com/code-review-in-the-age-of-ai-from-review-to-audit
 
 # 图片路径
 

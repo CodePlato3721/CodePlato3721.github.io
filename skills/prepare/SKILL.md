@@ -24,6 +24,8 @@
 - `draft/<代号>/cn-banner.png`、`draft/<代号>/en-banner.png`、`draft/<代号>/cn-image-*.png`、`draft/<代号>/en-image-*.png`：本地图片文件（gitignore）
 - wrangler 已通过 `npx wrangler login` 登录
 
+**注意：图片上传到 R2 后，不要删除 `draft/<代号>/` 下的本地图片文件。** 这些文件虽已 gitignore，但仍需保留在本地供后续核对、重新上传或其他用途。
+
 ---
 
 ## 第一步：读取元数据，推导路径变量
@@ -156,6 +158,6 @@ URL：`https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{YYYY}/{MM}/{en-slug}
 告知用户：
 
 - `draft/<代号>/en-article.md` 已生成
-- 所有已上传的图片及其 R2 URL
+- 所有已上传的图片及其 R2 URL（本地图片文件保留不删除）
 - `draft/<代号>/metadata.md` 已更新
 - 下一步建议（发布中文版、英文版或各平台）
