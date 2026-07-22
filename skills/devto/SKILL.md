@@ -16,7 +16,7 @@ trigger: "发布devto:<draft代号>"
 
 ## 前提
 
-- `skills/.env` 中已设置 `DEVTO_API_KEY`
+- `skills/devto/.env` 中已设置 `DEVTO_API_KEY`
 
 ## 步骤
 

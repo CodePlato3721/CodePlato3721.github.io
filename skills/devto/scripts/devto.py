@@ -11,7 +11,7 @@ import frontmatter
 import requests
 from dotenv import load_dotenv
 
-load_dotenv(Path(__file__).parent.parent.parent / ".env")
+load_dotenv(Path(__file__).parent.parent / ".env")
 
 BASE_URL = "https://CodePlato3721.github.io/"
 DEVTO_API = "https://dev.to/api/articles"
@@ -54,7 +54,7 @@ def sanitize_tag(tag: str) -> str:
 def publish(filepath: str) -> None:
     api_key = os.getenv("DEVTO_API_KEY")
     if not api_key:
-        sys.exit("Error: DEVTO_API_KEY not set in publish/.env")
+        sys.exit("Error: DEVTO_API_KEY not set in skills/devto/.env")
 
     path = Path(filepath)
     if not path.exists():
