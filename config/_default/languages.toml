@@ -5,7 +5,7 @@
   contentDir = "content/en"
 
   [en.params.sidebar]
-    subtitle = "AI Engineer in the making"
+    subtitle = "I believe human creativity is the real tree of AI Coding — code and models are but shadows on the cave wall."
 
 [[en.menus.social]]
   identifier = "github"
@@ -35,7 +35,7 @@
   contentDir = "content/zh"
 
   [zh.params.sidebar]
-    subtitle = "AI 工程师，炼成中"
+    subtitle = "我相信，人类的创造力才是 AI Coding 的真实之树，而代码与模型不过是投射在洞穴墙上的影子。"
 
 [[zh.menus.social]]
   identifier = "github"
