@@ -12,6 +12,7 @@ All posts must use one of these categories (pick the best fit):
 | AI 哲学 | AI Philosophy |
 | AI 方法论 | AI Methodology |
 | 软件哲学 | Software Philosophy |
+| 随想 | Thoughts |
 
 In frontmatter: use the Chinese name for `zh` posts, English name for `en` posts.
 
@@ -171,3 +172,4 @@ url=https://hackernoon.com/money-saving-tips-every-openclaw-user-should-know
 | AI 哲学 | AI Philosophy |
 | AI 方法论 | AI Methodology |
 | 软件哲学 | Software Philosophy |
+| 随想 | Thoughts |
