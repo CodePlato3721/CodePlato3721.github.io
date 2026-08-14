@@ -1,6 +1,9 @@
 ---
 title: "Terms of Service - Cicada"
+slug: "cicada-terms-of-service"
 date: 2026-08-13
+sitemap:
+  disable: true
 ---
 
 # Terms of Service
