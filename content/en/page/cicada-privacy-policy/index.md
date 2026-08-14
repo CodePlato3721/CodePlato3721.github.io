@@ -1,6 +1,9 @@
 ---
 title: "Privacy Policy - Cicada"
+slug: "cicada-privacy-policy"
 date: 2026-08-13
+sitemap:
+  disable: true
 ---
 
 # Privacy Policy
