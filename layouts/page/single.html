@@ -1,0 +1,32 @@
+{{/*
+    Standalone page template for content under the "page" section (e.g.
+    content/en/page/...) that has no explicit `layout` set in front matter
+    (e.g. Terms of Service, Privacy Policy). Archives and Search keep using
+    their own explicit `layout` front matter, so they are unaffected by
+    this override.
+
+    Unlike the theme's default single.html, this drops the left profile
+    sidebar and the right table-of-contents sidebar so the page reads as a
+    self-contained document instead of a blog post embedded in the site
+    chrome.
+*/}}
+
+{{/* The {{ "" }} isn't decorative: a truly empty {{ define }} body doesn't
+     register as an override in Hugo's template set, so baseof's default
+     sidebar content bleeds through. A no-op action keeps the body non-empty
+     while still rendering nothing. */}}
+{{ define "left-sidebar" }}{{ "" }}{{ end }}
+{{ define "right-sidebar" }}{{ "" }}{{ end }}
+
+{{ define "main" }}
+<style>
+    /* No sidebars to balance the line length against, so cap it ourselves. */
+    .standalone-page { max-width: 760px; margin: 0 auto; width: 100%; }
+</style>
+<article class="main-article standalone-page">
+    {{ partial "article/components/header" (dict "Page" . "IsList" false) }}
+    {{ partial "article/components/content" . }}
+</article>
+
+{{ partialCached "footer/footer" . }}
+{{ end }}
