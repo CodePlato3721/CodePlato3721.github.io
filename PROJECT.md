@@ -147,21 +147,6 @@ url=https://hackernoon.com/money-saving-tips-every-openclaw-user-should-know
 | `<en-image-01>` | https://pub-deacd49348914a49b1254b01f351ef0d.r2.dev/{YYYY}/{MM}/{en-slug}/en/01.png |
 ```
 
-## Skills
-
-所有 skill 文件位于 `skills/<skill-name>/SKILL.md`。遇到以下触发短语时，读取对应 SKILL.md 并按其中步骤执行。
-
-| 触发短语 | 加载的 SKILL.md |
-|---------|----------------|
-| "prepare:<代号>"、"准备草稿:<代号>" 或类似表述 | `skills/prepare/SKILL.md` |
-| "发布中文版:<代号>" 或类似表述 | `skills/draft-to-zh/SKILL.md` |
-| "发布英文版:<代号>" 或类似表述 | `skills/draft-to-en/SKILL.md` |
-| "发布linkedin:<代号>" 或类似表述 | `skills/linkedin/SKILL.md` |
-| "发布csdn:<代号>" 或类似表述 | `skills/csdn/SKILL.md` |
-| "发布hackernoon:<代号>" 或类似表述 | `skills/hackernoon/SKILL.md` |
-| "发布juejin:<代号>" 或类似表述 | `skills/juejin/SKILL.md` |
-| "发布devto:<代号>" 或类似表述 | `skills/devto/SKILL.md` |
-
 ## 分类映射（英文名）：
 
 | 类别 | categories |

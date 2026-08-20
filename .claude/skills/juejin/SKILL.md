@@ -1,16 +1,17 @@
 ---
-name: juejin-publish
-description: 为草稿目录中的文章生成掘金发布所需的元数据和简化版草稿
-trigger: "发布juejin:<代号>"
+name: juejin
+description: 为草稿目录中的文章生成掘金发布所需的元数据和简化版草稿。用户输入 "/juejin <代号>"、"发布juejin:<代号>" 或类似表述时使用。
 ---
 
-## 触发格式
+## 调用方式
 
 ```
-发布juejin:<代号>
+/juejin <代号>
 ```
 
-触发后，从触发短语中提取 `<代号>`，所有文件路径均以 `draft/<代号>/` 为根目录。
+例：`/juejin 0606tokenmaxxing`
+
+`<代号>` 从 slash 命令参数中获取（也可用 "发布juejin:<代号>" 等自然语言触发），所有文件路径均以 `draft/<代号>/` 为根目录。
 
 ## 目标
 

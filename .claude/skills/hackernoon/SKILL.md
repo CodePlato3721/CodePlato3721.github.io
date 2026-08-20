@@ -1,18 +1,17 @@
 ---
-name: hackernoon-prepare
-description: 从 draft/<代号>/en-article.md 生成 HackerNoon 发布素材，替换图片占位符为 R2 URL
-trigger: "发布hackernoon:<draft代号>"
+name: hackernoon
+description: 从 draft/<代号>/en-article.md 生成 HackerNoon 发布素材，替换图片占位符为 R2 URL。用户输入 "/hackernoon <代号>"、"发布hackernoon:<代号>" 或类似表述时使用。
 ---
 
-## 触发格式
+## 调用方式
 
 ```
-发布hackernoon:<代号>
+/hackernoon <代号>
 ```
 
-例：`发布hackernoon:0606tokenmaxxing`
+例：`/hackernoon 0606tokenmaxxing`
 
-触发后，从触发短语中提取 `<代号>`，所有文件路径均以 `draft/<代号>/` 为根目录。
+`<代号>` 从 slash 命令参数中获取（也可用 "发布hackernoon:<代号>" 等自然语言触发），所有文件路径均以 `draft/<代号>/` 为根目录。
 
 ## 目标
 

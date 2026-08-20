@@ -1,22 +1,21 @@
 ---
-name: devto-publish
-description: 从 draft/<代号>/en-article.md 生成并发布英文文章到 dev.to
-trigger: "发布devto:<draft代号>"
+name: devto
+description: 从 draft/<代号>/en-article.md 生成并发布英文文章到 dev.to。用户输入 "/devto <代号>"、"发布devto:<代号>" 或类似表述时使用。
 ---
 
-## 触发格式
+## 调用方式
 
 ```
-发布devto:<代号>
+/devto <代号>
 ```
 
-例：`发布devto:0606tokenmaxxing`
+例：`/devto 0606tokenmaxxing`
 
-触发后，从触发短语中提取 `<代号>`，所有文件路径均以 `draft/<代号>/` 为根目录。
+`<代号>` 从 slash 命令参数中获取（也可用 "发布devto:<代号>" 等自然语言触发），所有文件路径均以 `draft/<代号>/` 为根目录。
 
 ## 前提
 
-- `skills/devto/.env` 中已设置 `DEVTO_API_KEY`
+- `.claude/skills/devto/.env` 中已设置 `DEVTO_API_KEY`
 
 ## 步骤
 
@@ -84,7 +83,7 @@ https://x.com/codeplato2026
 在项目根目录下执行：
 
 ```powershell
-skills\.venv\Scripts\python.exe skills\devto\scripts\devto.py "$env:USERPROFILE\.blog-workspace\<代号>\devto\draft.md"
+skills\.venv\Scripts\python.exe .claude\skills\devto\scripts\devto.py "$env:USERPROFILE\.blog-workspace\<代号>\devto\draft.md"
 ```
 
 ### 6. 确认结果

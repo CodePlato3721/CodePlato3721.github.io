@@ -1,16 +1,17 @@
 ---
-name: csdn-publish
-description: 为草稿目录中的文章生成 CSDN 发布所需的元数据和草稿（图片占位符回填 R2 URL）
-trigger: "发布csdn:<代号>"
+name: csdn
+description: 为草稿目录中的文章生成 CSDN 发布所需的元数据和草稿（图片占位符回填 R2 URL）。用户输入 "/csdn <代号>"、"发布csdn:<代号>" 或类似表述时使用。
 ---
 
-## 触发格式
+## 调用方式
 
 ```
-发布csdn:<代号>
+/csdn <代号>
 ```
 
-触发后，从触发短语中提取 `<代号>`，所有文件路径均以 `draft/<代号>/` 为根目录。
+例：`/csdn 0606tokenmaxxing`
+
+`<代号>` 从 slash 命令参数中获取（也可用 "发布csdn:<代号>" 等自然语言触发），所有文件路径均以 `draft/<代号>/` 为根目录。
 
 ## 目标
 

@@ -2,12 +2,14 @@ public/
 resources/_gen/
 .hugo_build.lock
 .wrangler/
-.claude/
+.claude/*
+!.claude/skills/
 node_modules/
 publish/.env
 publish/.venv/
 skills/.env
 skills/**/.env
+.claude/skills/**/.env
 draft/**/*.png
 draft/**/*.jpg
 draft/**/*.jpeg
