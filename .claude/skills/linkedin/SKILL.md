@@ -40,7 +40,7 @@ description: 从 draft/<代号>/ 生成 LinkedIn 发布所需的素材。用户�
 - 结尾按以下优先级决定是否附上链接：
   1. 如果 `draft/<代号>/metadata.md` 的「首发」中 `url` 有值，使用该首发 URL
   2. 如果「首发」没有 `url`，检查「HackerNoon」段落是否有 `url`，如果有则使用该 HackerNoon URL
-  3. 如果英文版已发布到本博客（`en-slug` 对应页面存在），使用 `https://CodePlato3721.github.io/en/post/{en-slug}/`
+  3. 如果英文版已发布到本博客（`en-slug` 对应页面存在），使用 `https://CodePlato3721.github.io/post/{en-slug}/`（`en` 是默认语言，**不带 `/en/` 子路径**，只有 `zh` 会带 `/zh/`）
   4. 以上都没有，则不附链接
 
   有链接时结尾附上：
